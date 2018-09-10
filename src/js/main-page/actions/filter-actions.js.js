@@ -1,12 +1,7 @@
-import {
-    createAction
-} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
-export const createNewFilter = createAction("CREATE_FILTER", dataFilter => dataFilter);
-export const onOpenContextList = createAction("OPEN_CONTEXT_LIST", id => id);
-export const onOpenDemisionsList = createAction("OPEN_DEMISION_LIST", id => id);
-export const onOpenFilter = createAction("OPEN_FILTER", id => id);
+export const createDisplay = createAction('CREATE_FILTER');
 
-export const changeStatusContext = createAction("CHANGE_STATUS_CONTEXT", path => path);
-export const changeStatusDemision = createAction("CHANGE_STATUS_DEMISION", path => path);
-export const checkAccessStatus = createAction("CHECK_ACCESS_STATUS", path => path);
+export const changeStateContext = createAction('CHANGE_STATE_CONTEXT', ids => ids);
+export const changeStateDemission = createAction('CHANGE_STATE_DEMISSION', ids => ids);
+export const changeStateResult = createAction('CHANGE_STATE_RESULT', ids => ids);

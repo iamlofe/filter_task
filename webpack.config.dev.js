@@ -14,30 +14,31 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [{
-                        loader: 'style-loader',
+                    loader: 'style-loader',
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1
                     },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        },
+                },
+                {
+                    loader: 'sass-loader',
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        ident: 'postcss',
+                        plugins: () => [autoprefixer()],
                     },
-                    {
-                        loader: 'sass-loader',
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: () => [autoprefixer()],
-                        },
-                    },
+                },
                 ],
             },
         ],
     },
 
     plugins: [...WebpackBaseConfig.plugins],
+
 
     devtool: 'inline-source-map',
 

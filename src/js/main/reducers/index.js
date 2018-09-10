@@ -3,10 +3,14 @@ import {
 } from 'redux';
 
 import
-dataFilterReducer
+filterReducer
 from '../../main-page/reducers/filter-reducer'
+import {
+    mainReducer
+} from './main'
 
 
 export default combineReducers({
-    filterReducer: dataFilterReducer
+    filterReducer,
+    mainReducer
 });

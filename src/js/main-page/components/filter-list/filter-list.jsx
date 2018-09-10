@@ -1,19 +1,19 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 import ButtonCreateFilter from 'shared/components/button-create-filter/button-create-filter';
 import Filter from '../../components/filter/filter';
 
-import RecordContext from '../../records/contexts-record';
-
-import data from '../../constants/data.json';
-
 import './filter-list.scss';
 
 class FilterList extends React.PureComponent {
+    static propTypes = {
+        onLoadData: propTypes.func.isRequired,
+        onCreateDisplay: propTypes.func.isRequired,
+        isStatusLoadData: propTypes.bool.isRequired,
+    }
     componentDidMount() {
-        const parsed = data.map(c => RecordContext.parse(c));
-        console.log(parsed);
-
+        this.props.onLoadData();
         // const dim = parsed.reduce((acc, cur) => {
         //     return [...acc, ...cur.get('listsDimensions')];
         // }, []);
@@ -28,24 +28,18 @@ class FilterList extends React.PureComponent {
     }
 
     test = () => {
-        const parsed = data.map(c => RecordContext.parse(c));
-        console.log(parsed);
-
-        this.props.onPushDataFilter(parsed);
+        this.props.onCreateDisplay();
         setTimeout(() => {
             console.log(this.props);
         }, 0);
     };
     render() {
-        const { filterList, onOpenFilter } = this.props;
+        const { isStatusLoadData, filterIds } = this.props;
         return (
             <div className="filter-container__main-container">
-                <ButtonCreateFilter test={this.test} />
+                {isStatusLoadData ? <span>...</span> : <ButtonCreateFilter test={this.test} />}
                 <div className="filter-container__state-container">
-                    {filterList &&
-                        filterList.map((filter, indexFilter) => (
-                            <Filter key={indexFilter} indexFilter={indexFilter} onOpenFilter={onOpenFilter} />
-                        ))}
+                    {filterIds && filterIds.map(filterId => <Filter key={filterId} filterId={filterId} />)}
                 </div>
             </div>
         );

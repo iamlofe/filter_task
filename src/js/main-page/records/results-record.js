@@ -1,9 +1,4 @@
-import {
-    Record,
-    List,
-} from 'immutable';
-
-import idGeneration from '../tools/generation-id-tool';
+import { Record } from 'immutable';
 
 const Results = new Record({
     id: null,
@@ -13,7 +8,7 @@ const Results = new Record({
     isActive: false,
     isAccess: false,
     resultsSave: []
-})
+});
 
 
 export default class RecordResults extends Results {
@@ -23,6 +18,6 @@ export default class RecordResults extends Results {
             title: result.title,
             demisionId: dimId,
             contextId: ctxId
-        })
+        });
     }
 }

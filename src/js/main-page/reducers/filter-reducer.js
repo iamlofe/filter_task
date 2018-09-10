@@ -1,43 +1,34 @@
-import {
-    handleActions
-} from 'redux-actions';
-import {
-    List
-} from 'immutable'
+import { handleActions } from 'redux-actions';
+import { Map, List } from 'immutable';
 
-import data from '../../main-page/constants/data.json';
+import { createDisplay, changeStateContext, changeStateDemission, changeStateResult } from '../actions/filter-actions.js';
 
-import RecordContext from '../records/contexts-record';
+import idGenerator from '../tools/generation-id-tool';
 
-
-import {
-    createNewFilter,
-    onOpenContextList,
-    onOpenFilter,
-    onOpenDemisionsList,
-    changeStatusContext,
-    checkAccessStatus
-} from '../actions/filter-actions.js'
-
-import {
-    RecordInitialData
-} from '../records/contexts-record'
-
-const initialState = new RecordInitialData();
+const initialState = new Map();
 
 export default handleActions({
-    [createNewFilter]: (state, action) => state.set('structureContext', state.get('structureContext').push(new List(action.payload))),
-    [onOpenContextList]: (state, action) => state.setIn(['structureContext', action.payload, 0, 'isActiveLists', 'isActiveContext'], !state.getIn(['structureContext', action.payload, 0, 'isActiveLists', 'isActiveContext'])),
-    [onOpenDemisionsList]: (state, action) => state.setIn(['structureContext', action.payload, 0, 'isActiveLists', 'isActiveDemision'], !state.getIn(['structureContext', action.payload, 0, 'isActiveLists', 'isActiveDemision'])),
-    [onOpenFilter]: (state, action) => state.setIn(['structureContext', action.payload, 0, 'isActiveLists', 'isOpenFilter'], !state.getIn(['structureContext', action.payload, 0, 'isActiveLists', 'isOpenFilter'])),
-
-    [changeStatusContext]: (state, action) => {
-        if (action.payload.length == 2) {
-            return state.setIn(['structureContext', ...action.payload, 'isActive'], !state.getIn(['structureContext', ...action.payload, 'isActive'])).setIn(['structureContext', ...action.payload, 'listsDimensions', 0, 'isAccess'], !state.getIn(['structureContext', ...action.payload, 'listsDimensions', 0, 'isAccess']))
-        } else if (action.payload.length == 4) {
-            return state.setIn(['structureContext', ...action.payload, 'isActive'], !state.getIn(['structureContext', ...action.payload, 'isActive'])).setIn(['structureContext', ...action.payload, 'listsResults', 0, 'isAccess'], !state.getIn(['structureContext', ...action.payload, 'listsResults', 0, 'isAccess']))
-        } else {
-            return state.setIn(['structureContext', ...action.payload, 'isActive'], !state.getIn(['structureContext', ...action.payload, 'isActive']))
+    [changeStateContext]: (state, { payload: { filterId, contextId } }) => {
+        if (state.getIn([filterId, contextId])) {
+            return state.deleteIn([filterId, contextId]);
         }
-    }
-}, initialState)
+        return state.setIn([filterId, contextId], new Map());
+    },
+    [changeStateDemission]: (state, { payload: { filterId, contextId, demisionId } }) => {
+        if (state.getIn([filterId, contextId, demisionId])) {
+            return state.deleteIn([filterId, contextId, demisionId]);
+        }
+        return state.setIn([filterId, contextId, demisionId], new List());
+    },
+    [changeStateResult]: (state, {
+        payload: {
+            filterId, contextId, demisionId, resultId
+        }
+    }) => 
+        // if (state.getIn([filterId, contextId, demisionId]).findIndex(resultId) === -1) {
+             state.updateIn([filterId, contextId, demisionId], items => items.push(resultId))
+        // }
+        // return state.updateIn([filterId, contextId, demisionId], items => items.delete(resultId));
+    ,
+    [createDisplay]: state => state.set(idGenerator(), new Map()),
+}, initialState);

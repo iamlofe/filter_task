@@ -1,23 +1,20 @@
-import {
-    connect
-} from 'react-redux';
+import { connect } from 'react-redux';
 
 import FilterList from '../components/filter-list/filter-list';
 
-import {
-    createNewFilter,
-    onOpenContextList,
-    onOpenFilter,
-    onOpenDemisionsList
-} from '../actions/filter-actions.js'
+import { createDisplay } from '../actions/filter-actions.js';
+
+import { loadData } from '../../main/actions/main-actions';
 
 export default connect(
     state => ({
-        filterList: state.filterReducer.get('structureContext'),
-
+        initialFilterData: state.mainReducer.get('initialDataFilter'),
+        isStatusLoadData: state.mainReducer.get('isStatusLoadData'),
+        filterIds: state.filterReducer.keySeq().toArray(),
+        dataFilter: state.filterReducer,
     }),
     dispatch => ({
-        onPushDataFilter: (dataFilter) => dispatch(createNewFilter(dataFilter)),
-        onOpenFilter: (id) => dispatch(onOpenFilter(id))
+        onLoadData: () => dispatch(loadData()),
+        onCreateDisplay: () => dispatch(createDisplay())
     }),
 )(FilterList);
