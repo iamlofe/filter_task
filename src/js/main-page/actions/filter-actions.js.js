@@ -7,3 +7,4 @@ export const changeStateDemission = createAction('CHANGE_STATE_DEMISSION', ids =
 export const changeStateResult = createAction('CHANGE_STATE_RESULT', ids => ids);
 
 export const chooseTypeSearch = createAction('CHOOSE_TYPE_SEARCH', type => type);
+export const inputTitleSearch = createAction('INPUT_TITLE_SEARCH', infoSearch => infoSearch);

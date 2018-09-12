@@ -6,6 +6,7 @@ import { createDisplay } from '../actions/filter-actions.js';
 
 import { loadData } from '../../main/actions/main-actions';
 
+
 export default connect(
     state => ({
         initialFilterData: state.mainReducer.get('initialDataFilter'),

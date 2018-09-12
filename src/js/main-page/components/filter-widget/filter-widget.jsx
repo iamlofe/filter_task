@@ -2,7 +2,8 @@ import React from 'react';
 import className from 'classnames';
 import Draggable from 'react-draggable';
 import propTypes from 'prop-types';
-// import { List } from 'antd';
+
+import './filter-widget.scss';
 
 class FilterWidget extends React.PureComponent {
     static propTypes = {
@@ -25,7 +26,6 @@ class FilterWidget extends React.PureComponent {
         this.setState({
             isOpenDemissions: !this.state.isOpenDemissions,
             isOpenContexts: false,
-
         });
     };
 
@@ -33,10 +33,12 @@ class FilterWidget extends React.PureComponent {
         console.log(this.props);
     };
 
+
     render() {
         const {
             filterId, isOpenFilterWidget, initialFilterData, onChangeStateContext,
-            dataFilter, onChangeStateDemission, onChangeStateResult, onChooseTypeSearch
+            dataFilter, onChangeStateDemission, onChangeStateResult, onChooseTypeSearch,
+            onInputTitleSearch
         } = this.props;
 
         return (
@@ -99,14 +101,14 @@ class FilterWidget extends React.PureComponent {
                                     >
                                         {initialFilterData.map(context => (
                                             context.get('listsDimensions').map((dem) => {
-                                                if (dataFilter.getIn([filterId, context.id])) {
+                                                if (dataFilter.getIn([filterId, 'contextIds', context.id])) {
                                                     return (<div className="filter-container__checkbox" key={dem.id}>
                                                         <input
                                                             type="checkbox"
                                                             onChange={() => onChangeStateDemission({ filterId, contextId: context.id, demisionId: dem.id })}
                                                         />
                                                         <p>{dem.get('id')}</p>
-                                                            </div>);
+                                                    </div>);
                                                 }
                                             })
 
@@ -118,11 +120,11 @@ class FilterWidget extends React.PureComponent {
                                         <div className="filter-container__icon-search" />
 
                                         <div className="filter-container__container-field">
-                                            <input type="text" className="filter-container__field-search" />
+                                            <input type="text" className="filter-container__field-search" onChange={e => onInputTitleSearch({ filterId, titleSearch: e.target.value })} />
                                             <div className="filter-container__sorts">
-                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch('type')}>**</div>
-                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch('type')}>*</div>
-                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch('type')}>A-Z</div>
+                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch({ filterId, searchType: ' exactMatch' })}>**</div>
+                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch({ filterId, searchType: 'overlap' })}>*</div>
+                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch({ filterId, searchType: 'beginWith' })}>A-Z</div>
                                             </div>
                                         </div>
                                     </div>
@@ -133,16 +135,16 @@ class FilterWidget extends React.PureComponent {
                                     {initialFilterData.map(context => (
                                         context.get('listsDimensions').map(dem => (
                                             dem.get('listsResults').map((res) => {
-                                                if (dataFilter.getIn([filterId, context.id, dem.id])) {
+                                                if (dataFilter.getIn([filterId, 'contextIds', context.id, dem.id])) {
                                                     return (<div className="filter-container__checkbox" key={res.id}>
                                                         <input
                                                             type="checkbox"
                                                             onChange={() => onChangeStateResult({
-                                                                filterId, contextId: context.id, demisionId: dem.id, resultInfo: res
+                                                                filterId, contextId: context.id, demisionId: dem.id, resultId: res.get('id')
                                                             })}
                                                         />
                                                         <p>{res.get('id')}</p>
-                                                            </div>);
+                                                    </div>);
                                                 }
                                             })
                                         ))))}
