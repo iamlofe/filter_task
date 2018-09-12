@@ -17,12 +17,15 @@ class FilterWidget extends React.PureComponent {
     onOpenContexts = () => {
         this.setState({
             isOpenContexts: !this.state.isOpenContexts,
+            isOpenDemissions: false,
         });
     };
 
     onOpenDemissions = () => {
         this.setState({
             isOpenDemissions: !this.state.isOpenDemissions,
+            isOpenContexts: false,
+
         });
     };
 
@@ -32,7 +35,8 @@ class FilterWidget extends React.PureComponent {
 
     render() {
         const {
-            filterId, isOpenFilterWidget, initialFilterData, onChangeStateContext, dataFilter, onChangeStateDemission, onChangeStateResult
+            filterId, isOpenFilterWidget, initialFilterData, onChangeStateContext,
+            dataFilter, onChangeStateDemission, onChangeStateResult, onChooseTypeSearch
         } = this.props;
 
         return (
@@ -78,16 +82,6 @@ class FilterWidget extends React.PureComponent {
                                                     <p>{context.get('id')}</p>
                                                 </div>
                                             ))}
-                                        {/* {filterList.get(indexFilter).map((context, indexContext) => (
-                                            <div className="filter-container__checkbox">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={context.get('isActive')}
-                                                    onChange={this.test.bind(this, indexFilter, indexContext)}
-                                                />
-                                                <p>{context.get('title')}</p>
-                                            </div>
-                                        ))} */}
                                     </div>
                                 </div>
 
@@ -117,28 +111,6 @@ class FilterWidget extends React.PureComponent {
                                             })
 
                                         ))}
-
-
-                                        {/* {filterList.get(indexFilter).map((context, indexContext) => (
-                                            <div>
-                                                {context.getIn(['listsDimensions', 0, 'isAccess']) &&
-                                                    context.get('listsDimensions').map((dem, indexDemision) => (
-                                                        <div className="filter-container__checkbox">
-                                                            <input
-                                                                type="checkbox"
-                                                                value={dem.get('isActive')}
-                                                                onChange={this.test.bind(
-                                                                    this,
-                                                                    indexFilter,
-                                                                    indexContext,
-                                                                    indexDemision,
-                                                                )}
-                                                            />
-                                                            <p>{dem.get('title')}</p>
-                                                        </div>
-                                                    ))}
-                                            </div>
-                                        ))} */}
                                     </div>
                                 </div>
                                 <div className="filter-container__search">
@@ -148,9 +120,9 @@ class FilterWidget extends React.PureComponent {
                                         <div className="filter-container__container-field">
                                             <input type="text" className="filter-container__field-search" />
                                             <div className="filter-container__sorts">
-                                                <div className="filter-container__sorts-example">**</div>
-                                                <div className="filter-container__sorts-example">*</div>
-                                                <div className="filter-container__sorts-example">A-Z</div>
+                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch('type')}>**</div>
+                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch('type')}>*</div>
+                                                <div className="filter-container__sorts-example" onClick={() => onChooseTypeSearch('type')}>A-Z</div>
                                             </div>
                                         </div>
                                     </div>
@@ -166,42 +138,14 @@ class FilterWidget extends React.PureComponent {
                                                         <input
                                                             type="checkbox"
                                                             onChange={() => onChangeStateResult({
-                                                                filterId, contextId: context.id, demisionId: dem.id, resultId: res.id
+                                                                filterId, contextId: context.id, demisionId: dem.id, resultInfo: res
                                                             })}
                                                         />
                                                         <p>{res.get('id')}</p>
-                                                    </div>);
+                                                            </div>);
                                                 }
                                             })
                                         ))))}
-
-
-                                    {/* {filterList.get(indexFilter).map((context, indexContext) => (
-                                        <div>
-                                            {context.getIn(['listsDimensions', 0, 'isAccess']) &&
-                                                context.get('listsDimensions').map((dem, indexDemision) => (
-                                                    <div>
-                                                        {dem.getIn(['listsResults', 0, 'isAccess']) &&
-                                                            dem.get('listsResults').map((res, indexResult) => (
-                                                                <div className="filter-container__checkbox">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        value={res.get('isActive')}
-                                                                        onChange={this.test.bind(
-                                                                            this,
-                                                                            indexFilter,
-                                                                            indexContext,
-                                                                            indexDemision,
-                                                                            indexResult,
-                                                                        )}
-                                                                    />
-                                                                    <p>{res.get('id')}</p>
-                                                                </div>
-                                                            ))}
-                                                    </div>
-                                                ))}
-                                        </div>
-                                    ))} */}
                                 </div>
                             </div>
                         </div>

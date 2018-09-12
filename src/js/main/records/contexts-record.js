@@ -6,13 +6,11 @@ const Context = new Record({
     id: null,
     title: null,
     listsDimensions: new List(),
-    isAccess: true,
-    isActive: false,
 });
 
-export default class RecordContext extends Context {
+export default class ContextRecord extends Context {
     static parse(context) {
-        return new RecordContext({
+        return new ContextRecord({
             id: context.id,
             title: context.title,
             listsDimensions:

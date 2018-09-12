@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { Map, List } from 'immutable';
 
-import { createDisplay, changeStateContext, changeStateDemission, changeStateResult } from '../actions/filter-actions.js';
+import { createDisplay, changeStateContext, changeStateDemission, changeStateResult, chooseTypeSearch } from '../actions/filter-actions.js';
 
 import idGenerator from '../tools/generation-id-tool';
 
@@ -22,13 +22,15 @@ export default handleActions({
     },
     [changeStateResult]: (state, {
         payload: {
-            filterId, contextId, demisionId, resultId
+            filterId, contextId, demisionId, resultInfo
         }
-    }) => 
-        // if (state.getIn([filterId, contextId, demisionId]).findIndex(resultId) === -1) {
-             state.updateIn([filterId, contextId, demisionId], items => items.push(resultId))
-        // }
-        // return state.updateIn([filterId, contextId, demisionId], items => items.delete(resultId));
-    ,
+    }) => {
+        const listIds = state.getIn([filterId, contextId, demisionId]);
+        const index = listIds.findIndex(result => result.get('id') === resultInfo.get('id'));
+        return state.setIn([filterId, contextId, demisionId], index === -1 ? listIds.push(resultInfo) : listIds.splice(index, 1));
+    },
+    [chooseTypeSearch]: (state, { payload }) => {
+
+    },
     [createDisplay]: state => state.set(idGenerator(), new Map()),
 }, initialState);

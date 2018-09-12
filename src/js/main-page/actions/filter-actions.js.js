@@ -5,3 +5,5 @@ export const createDisplay = createAction('CREATE_FILTER');
 export const changeStateContext = createAction('CHANGE_STATE_CONTEXT', ids => ids);
 export const changeStateDemission = createAction('CHANGE_STATE_DEMISSION', ids => ids);
 export const changeStateResult = createAction('CHANGE_STATE_RESULT', ids => ids);
+
+export const chooseTypeSearch = createAction('CHOOSE_TYPE_SEARCH', type => type);

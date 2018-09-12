@@ -1,9 +1,6 @@
 import { createAction } from 'redux-actions';
 
-import
-RecordContext
-
-    from '../../main-page/records/contexts-record';
+import RecordContext from 'main/records/contexts-record';
 
 import dataFilter from '../../../../data.json';
 

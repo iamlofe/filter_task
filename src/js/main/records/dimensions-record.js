@@ -9,18 +9,15 @@ const Demisions = new Record({
     id: null,
     title: null,
     listsResults: new List(),
-    isActive: false,
-    isAccess: false,
-    demisionsSave: []
-})
+});
 
-export default class RecordDemisions extends Demisions {
+
+export default class DemisionsRecord extends Demisions {
     static parse(demisions, contextId) {
-        return new RecordDemisions({
+        return new DemisionsRecord({
             id: demisions.id,
             title: demisions.title,
-            contextId: contextId,
             listsResults: new List(demisions.listResults.map(r => RecordResults.parse(r, contextId, demisions.id))),
-        })
+        });
     }
 }
