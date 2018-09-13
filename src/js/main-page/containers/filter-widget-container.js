@@ -4,15 +4,20 @@ import FilterWidget from '../components/filter-widget/filter-widget';
 
 import { changeStateContext, changeStateDemission, changeStateResult, chooseTypeSearch, inputTitleSearch } from '../actions/filter-actions.js';
 
-import { selectContext, selectDemision, selectResults } from '../selectors/filter-selector';
+import { selectContext, selectDemision, selectResults, demisionsList, resultsList, contextsList, filteredDemisions, filteredResults } from '../selectors/filter-selector';
 
 export default connect(
-    state => ({
+    (state, props) => ({
         initialFilterData: state.mainReducer.get('initialDataFilter'),
         dataFilter: state.filterReducer,
-        selectContext: selectContext(state),
-        selectDemision: selectDemision(selectContext(state)),
-        selectResults: selectResults(selectContext(state))
+        contextsList: contextsList(state),
+        demisionsList: demisionsList(state),
+        resultsList: resultsList(state),
+        selectContext: selectContext(state, props),
+        selectDemision: selectDemision(state, props),
+        selectResults: selectResults(state, props),
+        filteredDemisions: filteredDemisions(state, props),
+        filteredResults: filteredResults(state, props)
     }),
     dispatch => ({
         onChangeStateContext: ids => dispatch(changeStateContext(ids)),

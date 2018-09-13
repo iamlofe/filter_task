@@ -3,6 +3,8 @@ import className from 'classnames';
 import Draggable from 'react-draggable';
 import propTypes from 'prop-types';
 
+import FilterItems from '../filter-items/filter-items';
+
 import './filter-widget.scss';
 
 class FilterWidget extends React.PureComponent {
@@ -37,8 +39,8 @@ class FilterWidget extends React.PureComponent {
     render() {
         const {
             filterId, isOpenFilterWidget, initialFilterData, onChangeStateContext,
-            dataFilter, onChangeStateDemission, onChangeStateResult, onChooseTypeSearch,
-            onInputTitleSearch
+            dataFilter, onChangeStateResult, onChooseTypeSearch,
+            onInputTitleSearch, filteredDemisions, filteredResults, onChangeStateDemission
         } = this.props;
 
         return (
@@ -99,20 +101,14 @@ class FilterWidget extends React.PureComponent {
                                                 .isOpenDemissions,
                                         })}
                                     >
-                                        {initialFilterData.map(context => (
-                                            context.get('listsDimensions').map((dem) => {
-                                                if (dataFilter.getIn([filterId, 'contextIds', context.id])) {
-                                                    return (<div className="filter-container__checkbox" key={dem.id}>
-                                                        <input
-                                                            type="checkbox"
-                                                            onChange={() => onChangeStateDemission({ filterId, contextId: context.id, demisionId: dem.id })}
-                                                        />
-                                                        <p>{dem.get('id')}</p>
-                                                    </div>);
-                                                }
-                                            })
 
-                                        ))}
+                                        <FilterItems
+                                            filterId={filterId}
+                                            filteredList={filteredDemisions}
+                                            onChangeState={
+                                                onChangeStateDemission
+                                            }
+                                        />
                                     </div>
                                 </div>
                                 <div className="filter-container__search">
@@ -131,23 +127,13 @@ class FilterWidget extends React.PureComponent {
                                 </div>
 
                                 <div className="filter-container__list-results">
-
-                                    {initialFilterData.map(context => (
-                                        context.get('listsDimensions').map(dem => (
-                                            dem.get('listsResults').map((res) => {
-                                                if (dataFilter.getIn([filterId, 'contextIds', context.id, dem.id])) {
-                                                    return (<div className="filter-container__checkbox" key={res.id}>
-                                                        <input
-                                                            type="checkbox"
-                                                            onChange={() => onChangeStateResult({
-                                                                filterId, contextId: context.id, demisionId: dem.id, resultId: res.get('id')
-                                                            })}
-                                                        />
-                                                        <p>{res.get('id')}</p>
-                                                    </div>);
-                                                }
-                                            })
-                                        ))))}
+                                    <FilterItems
+                                        filterId={filterId}
+                                        filteredList={filteredResults}
+                                        onChangeState={
+                                            onChangeStateResult
+                                        }
+                                    />
                                 </div>
                             </div>
                         </div>
