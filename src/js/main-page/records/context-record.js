@@ -1,8 +1,9 @@
 import { Record, Map } from 'immutable';
 
 export const CurrentContext = new Record({
-    searchTitle: null,
-    searchType: null,
+    searchTitle: '',
+    searchType: 'exactMatch',
+    savingData: null,
     contextIds: new Map()
 });
 

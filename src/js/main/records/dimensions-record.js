@@ -13,6 +13,7 @@ const Demisions = new Record({
 export default class DemisionsRecord extends Demisions {
     static parse(demisions, contextId) {
         return new DemisionsRecord({
+            id: demisions.id,
             demisionId: demisions.id,
             title: demisions.title,
             contextId,

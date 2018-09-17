@@ -5,6 +5,8 @@ const getFilterSelect = (state, props) =>
     state.filterReducer.get(props.filterId);
 
 const getFilter = state => state.mainReducer;
+const getInfoSearch = (state, props) => ({ searchType: state.filterReducer.getIn([props.filterId, 'searchType']), searchTitle: state.filterReducer.getIn([props.filterId, 'searchTitle']) });
+
 
 export const selectContext = createSelector(getFilterSelect, (contexts) => {
     let contextSelect = new List();
@@ -75,7 +77,7 @@ export const filteredDemisions = createSelector(
         let filteredDemisionsList = new List();
 
         contextList.map((context) => {
-            if (contextIds.includes(context.get('id'))) {
+            if (contextIds.includes(context.get('contextId'))) {
                 context.get('listsDimensions').map((demision) => {
                     filteredDemisionsList = filteredDemisionsList.push(demision);
                 });
@@ -97,6 +99,41 @@ export const filteredResults = createSelector(
                 });
             }
         });
-        return filteredResultsList;
+        return filteredResultsList.sort();
+    }
+);
+
+export const filteredResultsWithSort = createSelector(
+    filteredResults,
+    getInfoSearch,
+    (results, settingsSearch) => {
+        // exactMatch
+        // overlap
+        // beginWith
+        if (settingsSearch.searchType === 'beginWith') {
+            let listResultsBeginWith = new List();
+            results.map((res) => {
+                if (res.title.startsWith(settingsSearch.searchTitle)) {
+                    listResultsBeginWith = listResultsBeginWith.push(res);
+                }
+            });
+            return listResultsBeginWith;
+        } else if (settingsSearch.searchType === 'exactMatch') {
+            let listResultsExactMatch = new List();
+            results.map((res) => {
+                if (res.title === settingsSearch.searchTitle) {
+                    listResultsExactMatch = listResultsExactMatch.push(res);
+                }
+            });
+            return listResultsExactMatch;
+        } else if (settingsSearch.searchType === 'overlap') {
+            let listResultsOverlap = new List();
+            results.map((res) => {
+                if (res.title.includes(settingsSearch.searchTitle)) {
+                    listResultsOverlap = listResultsOverlap.push(res);
+                }
+            });
+            return listResultsOverlap;
+        }
     }
 );

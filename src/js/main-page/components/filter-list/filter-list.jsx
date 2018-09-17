@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import ButtonCreateFilter from 'shared/components/button-create-filter/button-create-filter';
-import Filter from '../../components/filter/filter';
+import Filter from '../../containers/filter-container';
 
 import './filter-list.scss';
 
@@ -14,17 +14,6 @@ class FilterList extends React.PureComponent {
     }
     componentDidMount() {
         this.props.onLoadData();
-        // const dim = parsed.reduce((acc, cur) => {
-        //     return [...acc, ...cur.get('listsDimensions')];
-        // }, []);
-
-        // console.log(dim);
-
-        // const res = dim.reduce((acc, cur) => {
-        //     return [...acc, ...cur.get('listsResults')];
-        // }, []);
-
-        // console.log(res);
     }
 
     test = () => {

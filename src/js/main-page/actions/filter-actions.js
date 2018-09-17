@@ -8,3 +8,6 @@ export const changeStateResult = createAction('CHANGE_STATE_RESULT', ids => ids)
 
 export const chooseTypeSearch = createAction('CHOOSE_TYPE_SEARCH', type => type);
 export const inputTitleSearch = createAction('INPUT_TITLE_SEARCH', infoSearch => infoSearch);
+
+export const onSaveStateWidget = createAction('ON_SAVE_STATE_WIDGET', info => info);
+export const onRestoreSavingData = createAction('ON_RESTORE_SAVING_DATA');

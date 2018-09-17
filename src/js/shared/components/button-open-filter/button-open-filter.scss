@@ -1,14 +1,26 @@
-.filter-container__button-open-filter {
-    display: flex;
+.filter-container__button-filter {
+border-radius: 3px;
 
-    p {
-        margin: 5px;
-        padding: 10px;
+p {
+padding: 8px;
 
-        cursor: pointer;
+cursor: pointer;
 
-        color: #fff;
-        border-radius: 3px;
-        background: aquamarine;
+color: #fff;
+
+}
+}
+.filter-container__button-save-filter{
+margin-right:5px;
+
+    margin-left:auto;
+
+background: #3CCB7A;
     }
+
+.filter-container__button-open-filter{
+    background: #34C6CB;
+}
+.filter-container__button-restore-filter{
+    background: #9F30CB;
 }

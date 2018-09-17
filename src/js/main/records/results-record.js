@@ -11,10 +11,12 @@ const Results = new Record({
 export default class ResultsRecord extends Results {
     static parse(result, contextId, demisionId) {
         return new ResultsRecord({
+            id: result.id,
+            demisionId,
+            contextId,
             resultId: result.id,
             title: result.title,
-            demisionId,
-            contextId
+
         });
     }
 }
