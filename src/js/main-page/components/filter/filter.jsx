@@ -1,18 +1,26 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Portal from 'shared/components/portal/portal';
-import Button from 'shared/components/button-open-filter/button-open-filter';
+import Button from 'shared/components/button-filter/button-filter';
 import FilterWidget from '../../containers/filter-widget-container';
+
+import { CurrentContext } from '../../records/context-record';
 
 
 import './filter.scss';
 
 class DisplayWidget extends React.PureComponent {
     static propTypes = {
-        filterId: propTypes.string.isRequired,
-        onSaveStateWidget: propTypes.func.isRequired,
+        filterId: PropTypes.string.isRequired,
+        onSaveStateWidget: PropTypes.func.isRequired,
+        dataWidget: PropTypes.instanceOf(CurrentContext).isRequired,
+        onRestoreSavingData: PropTypes.func
     }
+    static defaultProps = {
+        onRestoreSavingData: () => {}
+    }
+
     state = {
         isOpenFilterWidget: false,
     };
@@ -23,18 +31,26 @@ class DisplayWidget extends React.PureComponent {
         });
     };
 
+    onSaveState = () => {
+        const { filterId, dataWidget, onSaveStateWidget } = this.props;
+        onSaveStateWidget(filterId, dataWidget);
+    }
+
+    onRestoreState = () => {
+        const { onRestoreSavingData, filterId } = this.props;
+        onRestoreSavingData(filterId);
+    }
 
     render() {
-        const {
-            filterId, onSaveStateWidget, dataWidget, onRestoreSavingData
-        } = this.props;
+        const { filterId } = this.props;
+
         return (
             <div className="filter-container__state">
                 <div className="filter-container__state-content">
                     <div className="filter-container__space-buttons">
-                        <Button onMakeAction={this.onOpenFilterWidget} label="Open" />
-                        <Button onMakeAction={() => onSaveStateWidget({ filterId, savingData: dataWidget })} label="Save" />
-                        <Button onMakeAction={() => onRestoreSavingData({ filterId })} label="Restore" />
+                        <Button className="filter-container__button_open-filter" onClick={this.onOpenFilterWidget} label="Open" />
+                        <Button className="filter-container__button_save-filter" onClick={this.onSaveState} label="Save" />
+                        <Button className="filter-container__button_restore-filter" onClick={this.onRestoreState} label="Restore" />
                     </div>
 
                     <div className="filter-container__display-state-container">

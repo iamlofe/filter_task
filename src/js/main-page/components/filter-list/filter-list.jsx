@@ -1,34 +1,33 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-import ButtonCreateFilter from 'shared/components/button-create-filter/button-create-filter';
+import Button from 'shared/components/button-filter/button-filter';
 import Filter from '../../containers/filter-container';
 
 import './filter-list.scss';
 
 class FilterList extends React.PureComponent {
     static propTypes = {
-        onLoadData: propTypes.func.isRequired,
-        onCreateDisplay: propTypes.func.isRequired,
-        isStatusLoadData: propTypes.bool.isRequired,
+        onLoadData: PropTypes.func.isRequired,
+        onCreateDisplay: PropTypes.func.isRequired,
+        isStatusLoadData: PropTypes.bool.isRequired,
+        filterIds: PropTypes.arrayOf(PropTypes.string)
     }
+    static defaultProps = {
+        filterIds: []
+    };
+
     componentDidMount() {
         this.props.onLoadData();
     }
 
-    test = () => {
-        this.props.onCreateDisplay();
-        setTimeout(() => {
-            console.log(this.props);
-        }, 0);
-    };
     render() {
-        const { isStatusLoadData, filterIds } = this.props;
+        const { isStatusLoadData, filterIds, onCreateDisplay } = this.props;
         return (
             <div className="filter-container__main-container">
-                {isStatusLoadData ? <span>...</span> : <ButtonCreateFilter test={this.test} />}
+                {isStatusLoadData ? <span>...</span> : <Button onClick={onCreateDisplay} className="filter__button-create" label="Create" />}
                 <div className="filter-container__state-container">
-                    {filterIds && filterIds.map(filterId => <Filter key={filterId} filterId={filterId} />)}
+                    {filterIds.map(filterId => <Filter key={filterId} filterId={filterId} />)}
                 </div>
             </div>
         );

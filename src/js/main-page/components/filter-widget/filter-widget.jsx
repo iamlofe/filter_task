@@ -1,17 +1,47 @@
 import React from 'react';
 import className from 'classnames';
 import Draggable from 'react-draggable';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { List } from 'immutable';
 
 import FilterItems from '../filter-items/filter-items';
+import { CurrentContext } from '../../records/context-record';
+
 
 import './filter-widget.scss';
 
 class FilterWidget extends React.PureComponent {
     static propTypes = {
-        isOpenFilterWidget: propTypes.bool.isRequired,
-        onChangeStateContext: propTypes.func.isRequired
+        isOpenFilterWidget: PropTypes.bool.isRequired,
+        onChangeStateContext: PropTypes.func.isRequired,
+        filterId: PropTypes.string.isRequired,
+        onChangeStateResult: PropTypes.func,
+        onChooseTypeSearch: PropTypes.func,
+        onInputTitleSearch: PropTypes.func,
+        onChangeStateDemission: PropTypes.func,
+        dataFilter: PropTypes.instanceOf(CurrentContext).isRequired,
+        filteredDemisions: PropTypes.instanceOf(List),
+        contextsList: PropTypes.instanceOf(List),
+        filteredResultsWithSort: PropTypes.instanceOf(List),
+        selectContext: PropTypes.instanceOf(List),
+        selectDemision: PropTypes.instanceOf(List),
+        selectResults: PropTypes.instanceOf(List)
+
     }
+
+    static defaultProps = {
+        onChangeStateResult: () => {},
+        onChooseTypeSearch: () => {},
+        onInputTitleSearch: () => {},
+        onChangeStateDemission: () => {},
+        filteredDemisions: new List(),
+        contextsList: new List(),
+        filteredResultsWithSort: new List(),
+        selectContext: new List(),
+        selectDemision: new List(),
+        selectResults: new List()
+    }
+
     state = {
         isOpenContexts: false,
         isOpenDemissions: false,
@@ -35,13 +65,11 @@ class FilterWidget extends React.PureComponent {
         console.log(this.props);
     };
 
-
     render() {
         const {
-            filterId, isOpenFilterWidget, initialFilterData, onChangeStateContext,
-            dataFilter, onChangeStateResult, onChooseTypeSearch,
-            onInputTitleSearch, filteredDemisions, filteredResults, onChangeStateDemission,
-            contextsList, filteredResultsWithSort, selectResults, selectContext, selectDemision
+            contextsList, filteredResultsWithSort, selectResults, selectContext, selectDemision,
+            filterId, isOpenFilterWidget, onChangeStateContext, dataFilter, onChangeStateResult,
+            onChooseTypeSearch, onInputTitleSearch, filteredDemisions, onChangeStateDemission
         } = this.props;
 
         return (
@@ -91,7 +119,6 @@ class FilterWidget extends React.PureComponent {
                                 <div className="filter-container__demisions">
                                     <div className="filter-container__demisions-drop" onClick={this.onOpenDemissions}>
                                         <div className="filter-container__icon-drop-down" />
-
                                         <p className="filter-container__name">Demisions</p>
                                     </div>
                                     <div
@@ -114,7 +141,6 @@ class FilterWidget extends React.PureComponent {
                                 <div className="filter-container__search">
                                     <div className="filter-container__container-search">
                                         <div className="filter-container__icon-search" />
-
                                         <div className="filter-container__container-field">
                                             <input type="text" className="filter-container__field-search" onChange={e => onInputTitleSearch({ filterId, titleSearch: e.target.value })} />
                                             <div className="filter-container__sorts">

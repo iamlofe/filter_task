@@ -1,26 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { List } from 'immutable';
+
+import FilterCheckbox from '../filter-checkbox/filter-checkbox';
 
 import './filter-items.scss';
 
 class FilterItems extends React.PureComponent {
+    static propTypes = {
+        filteredList: PropTypes.instanceOf(List),
+        selectItems: PropTypes.instanceOf(List),
+        filterId: PropTypes.string.isRequired,
+        onChangeState: PropTypes.func
+    }
+
+    static defaultProps = {
+        filteredList: new List(),
+        selectItems: new List(),
+        onChangeState: () => {}
+    }
     render() {
         const {
-            filteredList, filterId, onChangeState, selectItems,
+            filteredList, filterId, onChangeState, selectItems
         } = this.props;
+        const checkboxProps = {
+            filterId, onChangeState, selectItems
+        };
+
         return (
             <React.Fragment>
-                {filteredList && filteredList.map(filteredItem => (<div className="filter-container__checkbox" >
-                    <input
-                        type="checkbox"
-                        key={filteredItem.get('contextId')}
-                        checked={selectItems.includes(filteredItem.get('id'))}
-                        onChange={() => onChangeState({
-                            filterId, contextId: filteredItem.get('contextId'), demisionId: filteredItem.get('demisionId'), resultId: filteredItem.get('resultId')
-                        })}
-                    />
-                    <p>{filteredItem.get('title')}</p>
-                </div>))}
-
+                {filteredList && filteredList.map(filteredItem => (
+                    <FilterCheckbox key={filteredItem.get('id')} filteredItem={filteredItem} {...checkboxProps} />))}
             </React.Fragment>
         );
     }

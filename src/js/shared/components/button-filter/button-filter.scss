@@ -1,0 +1,41 @@
+.filter-button {
+    display: inline-block;
+
+    margin:5px 3px;
+
+    border-radius: 3px;
+
+    
+    p {
+        padding: 8px;
+
+        cursor: pointer;
+
+        color: #fff;
+
+    }
+}
+
+.filter-container__button_save-filter {
+    margin-left: auto;
+
+    background: #3CCB7A;
+
+}
+
+.filter-container__button_open-filter {
+    background: #34C6CB;
+
+}
+
+.filter-container__button_restore-filter {
+    background: #9F30CB;
+
+}
+
+.filter__button-create {
+    margin:5px;
+
+    background: #CBC63C;
+
+}
