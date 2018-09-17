@@ -6,4 +6,5 @@ import {
 export default new Record({
     initialDataFilter: new List(),
     isStatusLoadData: true,
-})
+});
+

@@ -4,7 +4,8 @@ const Results = new Record({
     id: null,
     title: null,
     contextId: null,
-    demisionId: null
+    demisionId: null,
+    resultId: null
 });
 
 export default class ResultsRecord extends Results {
