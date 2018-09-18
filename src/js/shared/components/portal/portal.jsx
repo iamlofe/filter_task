@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FilterWidget from '../../../main-page/containers/filter-widget-container';
+import PropTypes from 'prop-types';
 
 class Portal extends React.PureComponent {
+    static propTypes = {
+        children: PropTypes.element.isRequired
+    };
+
     constructor(props) {
         super(props);
 
@@ -10,14 +14,17 @@ class Portal extends React.PureComponent {
         this.positionNode = null;
         this.wrapperNode = null;
     }
+
     componentWillMount() {
         this.portalRoot = document.getElementById('portal-root');
         this.wrapperNode = document.createElement('div');
     }
+
     componentDidMount() {
         this.portalRoot.appendChild(this.wrapperNode);
         this.updateWrapperPosition();
     }
+
     updateWrapperPosition() {
         const position = this.positionNode.getBoundingClientRect();
         const offsetTop = position.top + window.pageYOffset;
@@ -27,6 +34,7 @@ class Portal extends React.PureComponent {
         this.wrapperNode.style.top = `${offsetTop}px`;
         this.wrapperNode.style.left = `${offsetLeft}px`;
     }
+
     render() {
         return (
             <div

@@ -1,12 +1,12 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Route, Switch, Router } from 'react-router-dom';
-
-import history from 'main/tools/history';
+import { createBrowserHistory } from 'history';
 
 import ROUTES from 'main/constants/page-constants';
 
 import './main.scss';
+
+const history = createBrowserHistory();
 
 export default () => (
     <Router history={history}>

@@ -6,7 +6,7 @@ const Context = new Record({
     id: null,
     contextId: null,
     title: null,
-    listsDimensions: new List(),
+    listsDimensions: new List()
 });
 
 export default class ContextRecord extends Context {
@@ -15,8 +15,7 @@ export default class ContextRecord extends Context {
             id: context.id,
             contextId: context.id,
             title: context.title,
-            listsDimensions:
-                new List(context.listsDimensions.map(dimension => RecordDemisions.parse(dimension, context.id))),
+            listsDimensions: new List(context.listsDimensions.map(dimension => RecordDemisions.parse(dimension, context.id)))
         });
     }
 }

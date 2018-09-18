@@ -7,7 +7,7 @@ const Demisions = new Record({
     title: null,
     contextId: null,
     demisionId: null,
-    listsResults: new List(),
+    listsResults: new List()
 });
 
 export default class DemisionsRecord extends Demisions {
@@ -17,8 +17,7 @@ export default class DemisionsRecord extends Demisions {
             demisionId: demisions.id,
             contextId,
             title: demisions.title,
-            listsResults: new List(demisions.listResults.map(r =>
-                RecordResults.parse(r, contextId, demisions.id)))
+            listsResults: new List(demisions.listResults.map(r => RecordResults.parse(r, contextId, demisions.id)))
         });
     }
 }

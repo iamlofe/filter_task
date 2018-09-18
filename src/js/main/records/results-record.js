@@ -15,8 +15,7 @@ export default class ResultsRecord extends Results {
             demisionId,
             contextId,
             resultId: result.id,
-            title: result.title,
-
+            title: result.title
         });
     }
 }

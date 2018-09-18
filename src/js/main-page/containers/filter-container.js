@@ -6,11 +6,10 @@ import { onSaveStateWidget, onRestoreSavingData } from '../actions/filter-action
 
 export default connect(
     (state, props) => ({
-        dataWidget: state.filterReducer.get(props.filterId),
+        dataWidget: state.filterReducer.get(props.filterId)
     }),
     dispatch => ({
         onSaveStateWidget: info => dispatch(onSaveStateWidget(info)),
         onRestoreSavingData: filterId => dispatch(onRestoreSavingData(filterId))
     })
 )(Filter);
-

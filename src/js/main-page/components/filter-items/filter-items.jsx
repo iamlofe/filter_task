@@ -12,13 +12,13 @@ class FilterItems extends React.PureComponent {
         selectItems: PropTypes.instanceOf(List),
         filterId: PropTypes.string.isRequired,
         onChangeState: PropTypes.func
-    }
+    };
 
     static defaultProps = {
         filteredList: new List(),
         selectItems: new List(),
         onChangeState: () => {}
-    }
+    };
     render() {
         const {
             filteredList, filterId, onChangeState, selectItems
@@ -28,8 +28,15 @@ class FilterItems extends React.PureComponent {
 
         return (
             <React.Fragment>
-                {filteredList && filteredList.map(filteredItem => (
-                    <FilterCheckbox key={filteredItem.get('id')} filteredItem={filteredItem} {...checkboxProps} checked={selectItems.includes(filteredItem.get('id'))} />))}
+                {filteredList &&
+                    filteredList.map(filteredItem => (
+                        <FilterCheckbox
+                            key={filteredItem.get('id')}
+                            filteredItem={filteredItem}
+                            {...checkboxProps}
+                            checked={selectItems.includes(filteredItem.get('id'))}
+                        />
+                    ))}
             </React.Fragment>
         );
     }

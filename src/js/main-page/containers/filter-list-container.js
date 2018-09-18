@@ -10,7 +10,7 @@ export default connect(
     state => ({
         initialFilterData: state.mainReducer.get('initialDataFilter'),
         isStatusLoadData: state.mainReducer.get('isStatusLoadData'),
-        filterIds: state.filterReducer.keySeq().toArray(),
+        filterIds: state.filterReducer.keySeq().toArray()
     }),
     dispatch => ({
         onLoadData: () => dispatch(loadData()),

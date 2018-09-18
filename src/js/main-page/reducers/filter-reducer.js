@@ -26,32 +26,18 @@ export default handleActions(
             }
             return state.setIn([filterId, 'contextIds', contextId], new Map());
         },
-        [changeStateDemission]: (
-            state,
-            { payload: { filterId, contextId, demisionId } }
-        ) => {
+        [changeStateDemission]: (state, { payload: { filterId, contextId, demisionId } }) => {
             if (state.getIn([filterId, 'contextIds', contextId, demisionId])) {
                 return state.deleteIn([filterId, 'contextIds', contextId, demisionId]);
             }
-            return state.setIn(
-                [filterId, 'contextIds', contextId, demisionId],
-                new List()
-            );
+            return state.setIn([filterId, 'contextIds', contextId, demisionId], new List());
         },
-        [changeStateResult]: (
-            state,
-            {
-                payload: {
-                    filterId, contextId, demisionId, resultId
-                }
+        [changeStateResult]: (state, {
+            payload: {
+                filterId, contextId, demisionId, resultId
             }
-        ) => {
-            const listIds = state.getIn([
-                filterId,
-                'contextIds',
-                contextId,
-                demisionId
-            ]);
+        }) => {
+            const listIds = state.getIn([filterId, 'contextIds', contextId, demisionId]);
             const index = listIds.findIndex(result => result === resultId);
             return state.setIn(
                 [filterId, 'contextIds', contextId, demisionId],
@@ -60,8 +46,10 @@ export default handleActions(
         },
         [chooseTypeSearch]: (state, { payload: { filterId, searchType } }) =>
             state.setIn([filterId, 'searchType'], searchType),
-        [onSaveStateWidget]: (state, { payload: { filterId, dataWidget } }) => state.setIn([filterId, 'savingData'], dataWidget),
-        [onRestoreSavingData]: (state, { payload: { filterId } }) => state.set(filterId, state.getIn([filterId, 'savingData'])),
+        [onSaveStateWidget]: (state, { payload: { filterId, dataWidget } }) =>
+            state.setIn([filterId, 'savingData'], dataWidget),
+        [onRestoreSavingData]: (state, { payload: { filterId } }) =>
+            state.set(filterId, state.getIn([filterId, 'savingData'])),
         [inputTitleSearch]: (state, { payload: { filterId, titleSearch } }) =>
             state.setIn([filterId, 'searchTitle'], titleSearch),
         [createDisplay]: state => state.set(idGenerator(), new CurrentContext())

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import createStore from 'main/store';
 
-import MainContainer from 'main/containers/main-container';
+import MainContainer from 'main/components/main/main';
 
 const store = createStore();
 
