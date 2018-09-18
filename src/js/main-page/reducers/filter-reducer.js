@@ -60,8 +60,8 @@ export default handleActions(
         },
         [chooseTypeSearch]: (state, { payload: { filterId, searchType } }) =>
             state.setIn([filterId, 'searchType'], searchType),
-        [onSaveStateWidget]: (state, { payload: { filterId, savingData } }) => state.setIn([filterId, 'savingData'], savingData),
-        [onRestoreSavingData]: (state, { payload: { filterId } }) => state.setIn([filterId, 'contextIds'], state.getIn([filterId, 'savingData', 'contextIds'])),
+        [onSaveStateWidget]: (state, { payload: { filterId, dataWidget } }) => state.setIn([filterId, 'savingData'], dataWidget),
+        [onRestoreSavingData]: (state, { payload: { filterId } }) => state.set(filterId, state.getIn([filterId, 'savingData'])),
         [inputTitleSearch]: (state, { payload: { filterId, titleSearch } }) =>
             state.setIn([filterId, 'searchTitle'], titleSearch),
         [createDisplay]: state => state.set(idGenerator(), new CurrentContext())

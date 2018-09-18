@@ -23,14 +23,13 @@ class FilterItems extends React.PureComponent {
         const {
             filteredList, filterId, onChangeState, selectItems
         } = this.props;
-        const checkboxProps = {
-            filterId, onChangeState, selectItems
-        };
+
+        const checkboxProps = { filterId, onChangeState, selectItems };
 
         return (
             <React.Fragment>
                 {filteredList && filteredList.map(filteredItem => (
-                    <FilterCheckbox key={filteredItem.get('id')} filteredItem={filteredItem} {...checkboxProps} />))}
+                    <FilterCheckbox key={filteredItem.get('id')} filteredItem={filteredItem} {...checkboxProps} checked={selectItems.includes(filteredItem.get('id'))} />))}
             </React.Fragment>
         );
     }

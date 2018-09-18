@@ -1,37 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'immutable';
+
+import DemmisionsRecord from 'main/records/dimensions-record';
+import ContextsRecord from 'main/records/contexts-record';
+import ResultsRecord from 'main/records/results-record';
+
 
 import './filter-checkbox.scss';
 
 class FilterCheckbox extends React.PureComponent {
     static propTypes = {
         filterId: PropTypes.string.isRequired,
-        filteredItem: PropTypes.instanceOf(List),
+        filteredItem: PropTypes.oneOfType([PropTypes.instanceOf(DemmisionsRecord), PropTypes.instanceOf(ContextsRecord), PropTypes.instanceOf(ResultsRecord)]).isRequired,
         onChangeState: PropTypes.func.isRequired,
-        selectItems: PropTypes.instanceOf(List)
-    }
-
-    static defaultProps = {
-        filteredItem: new List(),
-        selectItems: new List()
+        checked: PropTypes.bool.isRequired
     }
 
     onChangeState = () => {
-        const {
-            filterId, onChangeState, filteredItem,
-        } = this.props;
+        const { filterId, onChangeState, filteredItem } = this.props;
         onChangeState({
             filterId, contextId: filteredItem.get('contextId'), demisionId: filteredItem.get('demisionId'), resultId: filteredItem.get('resultId')
         });
     }
     render() {
-        const { filteredItem, selectItems } = this.props;
+        const { filteredItem, checked } = this.props;
         return (
             <div className="filter-container__checkbox" >
                 <input
                     type="checkbox"
-                    checked={selectItems.includes(filteredItem.get('id'))}
+                    checked={checked}
                     onChange={this.onChangeState}
                 />
                 <p>{filteredItem.get('title')}</p>

@@ -13,6 +13,7 @@ class FilterList extends React.PureComponent {
         isStatusLoadData: PropTypes.bool.isRequired,
         filterIds: PropTypes.arrayOf(PropTypes.string)
     }
+
     static defaultProps = {
         filterIds: []
     };

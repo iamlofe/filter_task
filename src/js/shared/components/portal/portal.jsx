@@ -30,7 +30,7 @@ class Portal extends React.PureComponent {
     render() {
         return (
             <div
-                ref={positionNode => {
+                ref={(positionNode) => {
                     this.positionNode = positionNode;
                 }}
             >

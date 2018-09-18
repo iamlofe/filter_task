@@ -26,7 +26,6 @@ class FilterWidget extends React.PureComponent {
         selectContext: PropTypes.instanceOf(List),
         selectDemision: PropTypes.instanceOf(List),
         selectResults: PropTypes.instanceOf(List)
-
     }
 
     static defaultProps = {
@@ -59,10 +58,6 @@ class FilterWidget extends React.PureComponent {
             isOpenDemissions: !this.state.isOpenDemissions,
             isOpenContexts: false,
         });
-    };
-
-    clickTest = () => {
-        console.log(this.props);
     };
 
     render() {
@@ -131,9 +126,7 @@ class FilterWidget extends React.PureComponent {
                                         <FilterItems
                                             filterId={filterId}
                                             filteredList={filteredDemisions}
-                                            onChangeState={
-                                                onChangeStateDemission
-                                            }
+                                            onChangeState={onChangeStateDemission}
                                             selectItems={selectDemision}
                                         />
                                     </div>
@@ -142,7 +135,7 @@ class FilterWidget extends React.PureComponent {
                                     <div className="filter-container__container-search">
                                         <div className="filter-container__icon-search" />
                                         <div className="filter-container__container-field">
-                                            <input type="text" className="filter-container__field-search" onChange={e => onInputTitleSearch({ filterId, titleSearch: e.target.value })} />
+                                            <input type="text" className="filter-container__field-search" value={dataFilter.get('searchTitle')} onChange={e => onInputTitleSearch({ filterId, titleSearch: e.target.value })} />
                                             <div className="filter-container__sorts">
                                                 <div
                                                     className={className('filter-container__sorts-example', {
@@ -176,7 +169,6 @@ class FilterWidget extends React.PureComponent {
                                         selectItems={selectResults}
                                         filterId={filterId}
                                         filteredList={filteredResultsWithSort}
-
                                         onChangeState={
                                             onChangeStateResult
                                         }

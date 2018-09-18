@@ -107,9 +107,6 @@ export const filteredResultsWithSort = createSelector(
     filteredResults,
     getInfoSearch,
     (results, settingsSearch) => {
-        // exactMatch
-        // overlap
-        // beginWith
         if (settingsSearch.searchType === 'beginWith') {
             let listResultsBeginWith = new List();
             results.map((res) => {

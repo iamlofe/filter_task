@@ -6,8 +6,8 @@ const Demisions = new Record({
     id: null,
     title: null,
     contextId: null,
+    demisionId: null,
     listsResults: new List(),
-    demisionId: null
 });
 
 export default class DemisionsRecord extends Demisions {
@@ -15,8 +15,8 @@ export default class DemisionsRecord extends Demisions {
         return new DemisionsRecord({
             id: demisions.id,
             demisionId: demisions.id,
-            title: demisions.title,
             contextId,
+            title: demisions.title,
             listsResults: new List(demisions.listResults.map(r =>
                 RecordResults.parse(r, contextId, demisions.id)))
         });

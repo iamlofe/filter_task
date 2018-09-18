@@ -13,12 +13,13 @@ import './filter.scss';
 class DisplayWidget extends React.PureComponent {
     static propTypes = {
         filterId: PropTypes.string.isRequired,
-        onSaveStateWidget: PropTypes.func.isRequired,
+        onSaveStateWidget: PropTypes.func,
         dataWidget: PropTypes.instanceOf(CurrentContext).isRequired,
-        onRestoreSavingData: PropTypes.func
+        onRestoreSavingData: PropTypes.func,
     }
     static defaultProps = {
-        onRestoreSavingData: () => {}
+        onRestoreSavingData: () => {},
+        onSaveStateWidget: () => {}
     }
 
     state = {
@@ -33,12 +34,12 @@ class DisplayWidget extends React.PureComponent {
 
     onSaveState = () => {
         const { filterId, dataWidget, onSaveStateWidget } = this.props;
-        onSaveStateWidget(filterId, dataWidget);
+        onSaveStateWidget({ filterId, dataWidget });
     }
 
     onRestoreState = () => {
         const { onRestoreSavingData, filterId } = this.props;
-        onRestoreSavingData(filterId);
+        onRestoreSavingData({ filterId });
     }
 
     render() {
