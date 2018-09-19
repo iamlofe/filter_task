@@ -11,9 +11,9 @@ import {
 } from '../actions/filter-actions';
 
 import {
-    selectContext,
-    selectDemision,
-    selectResults,
+    selectedContext,
+    selectedDemision,
+    selectedResults,
     demisionsList,
     resultsList,
     contextsList,
@@ -29,17 +29,19 @@ export default connect(
         contextsList: contextsList(state),
         demisionsList: demisionsList(state),
         resultsList: resultsList(state),
-        selectContext: selectContext(state, props),
-        selectDemision: selectDemision(state, props),
-        selectResults: selectResults(state, props),
+        selectedContext: selectedContext(state, props),
+        selectedDemision: selectedDemision(state, props),
+        selectedResults: selectedResults(state, props),
         filteredDemisions: filteredDemisions(state, props),
         filteredResults: filteredResults(state, props),
         filteredResultsWithSort: filteredResultsWithSort(state, props)
     }),
     dispatch => ({
-        onChangeStateContext: ids => dispatch(changeStateContext(ids)),
-        onChangeStateDemission: ids => dispatch(changeStateDemission(ids)),
-        onChangeStateResult: ids => dispatch(changeStateResult(ids)),
+        onChangeStateContext: (filterId, contextId) => dispatch(changeStateContext(filterId, contextId)),
+        onChangeStateDemission: (filterId, contextId, demisionId) =>
+            dispatch(changeStateDemission(filterId, contextId, demisionId)),
+        onChangeStateResult: (filterId, contextId, demisionId, resultId) =>
+            dispatch(changeStateResult(filterId, contextId, demisionId, resultId)),
         onChooseTypeSearch: type => dispatch(chooseTypeSearch(type)),
         onInputTitleSearch: infoSearch => dispatch(inputTitleSearch(infoSearch))
     })

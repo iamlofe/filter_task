@@ -63,9 +63,9 @@ class FilterWidget extends React.PureComponent {
         const {
             contextsList,
             filteredResultsWithSort,
-            selectResults,
-            selectContext,
-            selectDemision,
+            selectedResults,
+            selectedContext,
+            selectedDemision,
             filterId,
             isOpenFilterWidget,
             onChangeStateContext,
@@ -114,7 +114,7 @@ class FilterWidget extends React.PureComponent {
                                             filterId={filterId}
                                             filteredList={contextsList}
                                             onChangeState={onChangeStateContext}
-                                            selectItems={selectContext}
+                                            selectItems={selectedContext}
                                         />
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@ class FilterWidget extends React.PureComponent {
                                             filterId={filterId}
                                             filteredList={filteredDemisions}
                                             onChangeState={onChangeStateDemission}
-                                            selectItems={selectDemision}
+                                            selectItems={selectedDemision}
                                         />
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@ class FilterWidget extends React.PureComponent {
                                 {dataFilter.get('searchType')}
                                 <div className="filter-container__list-results">
                                     <FilterItems
-                                        selectItems={selectResults}
+                                        selectItems={selectedResults}
                                         filterId={filterId}
                                         filteredList={filteredResultsWithSort}
                                         onChangeState={onChangeStateResult}

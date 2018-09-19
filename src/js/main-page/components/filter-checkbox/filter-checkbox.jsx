@@ -21,19 +21,27 @@ class FilterCheckbox extends React.PureComponent {
 
     onChangeState = () => {
         const { filterId, onChangeState, filteredItem } = this.props;
-        onChangeState({
+
+        onChangeState(
             filterId,
-            contextId: filteredItem.get('contextId'),
-            demisionId: filteredItem.get('demisionId'),
-            resultId: filteredItem.get('resultId')
-        });
+            filteredItem.get('contextId'),
+            filteredItem.get('demisionId'),
+            filteredItem.get('resultId')
+        );
     };
+
+    inputCheck = React.createRef();
+
+    clickOnTitle = () => {
+        this.inputCheck.current.click();
+    };
+
     render() {
         const { filteredItem, checked } = this.props;
         return (
             <div className="filter-container__checkbox">
-                <input type="checkbox" checked={checked} onChange={this.onChangeState} />
-                <p>{filteredItem.get('title')}</p>
+                <input type="checkbox" checked={checked} onChange={this.onChangeState} ref={this.inputCheck} />
+                <p onClick={this.clickOnTitle}>{filteredItem.get('title')}</p>
             </div>
         );
     }
