@@ -1,0 +1,20 @@
+.filter-container {
+    &__sorts-example {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 35px;
+        height: 20px;
+        margin-right: 5px;
+
+        color: #fff;
+        border: 0.5px solid #fff;
+        background: #242627;
+
+        font-size: 11px;
+    }
+    &__sorts-example--focus {
+        border: 2px solid #fff;
+    }
+}

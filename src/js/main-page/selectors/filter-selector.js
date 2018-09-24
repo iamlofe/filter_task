@@ -1,11 +1,15 @@
 import { createSelector } from 'reselect';
 import { List } from 'immutable';
 
-import { searchTypes } from '../constants/filter-constants';
+import { SearchTypes } from '../constants/filter-constants';
 
 const getFilterSelected = (state, props) => state.filterReducer.getIn([props.filterId, 'contextIds']);
 
 const getFilter = state => state.mainReducer.get('initialDataFilter');
+
+export const getIsSavingData = (state, props) => state.filterReducer.getIn([props.filterId, 'isSaving']);
+
+export const getIsRestoringData = (state, props) => state.filterReducer.getIn([props.filterId, 'isRestoring']);
 
 const getInfoSearch = (state, props) => ({
     searchType: state.filterReducer.getIn([props.filterId, 'searchType']),
@@ -77,26 +81,24 @@ export const filteredResults = createSelector(filteredDemisions, selectedDemisio
     });
 });
 
-const filterResults = (results, path, settingSearch) => {
+const filterResults = (results, condition, settingSearch) => {
     let listResultsBeginWith = new List();
     results.forEach((res) => {
-        if (path.condition(res.title, settingSearch)) {
+        if (condition(res.title, settingSearch)) {
             listResultsBeginWith = listResultsBeginWith.push(res);
         }
     });
     return listResultsBeginWith;
 };
 
+export const searchConditions = {
+    [SearchTypes.BEGIN_WITH.title]: (inputString, settingsSearch) => inputString.startsWith(settingsSearch.searchTitle),
+    [SearchTypes.EXACT_MATCH.title]: (inputString, settingsSearch) => inputString === settingsSearch.searchTitle,
+    [SearchTypes.OVERLAP.title]: (inputString, settingsSearch) => inputString.includes(settingsSearch.searchTitle)
+};
+
 export const filteredResultsWithSort = createSelector(filteredResults, getInfoSearch, (results, settingsSearch) => {
-    if (settingsSearch.searchType === searchTypes.beginWith.title) {
-        return filterResults(results, searchTypes.beginWith, settingsSearch);
-    }
+    const condition = searchConditions[settingsSearch.searchType];
 
-    if (settingsSearch.searchType === searchTypes.exactMatch.title) {
-        return filterResults(results, searchTypes.exactMatch, settingsSearch);
-    }
-
-    if (settingsSearch.searchType === searchTypes.overlap.title) {
-        return filterResults(results, searchTypes.overlap, settingsSearch);
-    }
+    return filterResults(results, condition, settingsSearch);
 });

@@ -2,6 +2,7 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
     "globals": {
+        "localStorage": true,
         "document": true,
         "window": true
     },
@@ -26,9 +27,12 @@
                 "allow": ["__REDUX_DEVTOOLS_EXTENSION__"]
             }
         ],
-        "react/jsx-filename-extension": [1, {
-            "extensions": [".js", ".jsx"]
-        }],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".js", ".jsx"]
+            }
+        ],
         "react/no-danger": "off",
         "max-len": [
             "error",

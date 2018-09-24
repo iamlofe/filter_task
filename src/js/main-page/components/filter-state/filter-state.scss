@@ -1,0 +1,16 @@
+.filter-container {
+    &__display-context,
+    &__display-demision,
+    &__display-result {
+        display: flex;
+    }
+}
+
+.filter-container {
+    &__display-context-title {
+        margin-right: 10px;
+    }
+    &__display-context {
+        padding: 5px;
+    }
+}

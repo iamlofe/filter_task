@@ -1,6 +1,25 @@
-.filter-container__space-buttons{
+.filter-container__space-buttons {
     display: flex;
 
-    width:50%;
-    margin:5px;
+    width: 50%;
+    margin: 5px;
+}
+.filter-container__button_delete-filter {
+    background: #cb2a1c;
+}
+.filter-container {
+    &__display-context,
+    &__display-demision,
+    &__display-result {
+        // display: flex;
+    }
+}
+.filter-container {
+    &__state {
+        transition: all 2s;
+    }
+
+    &__display-state {
+        overflow: auto;
+    }
 }

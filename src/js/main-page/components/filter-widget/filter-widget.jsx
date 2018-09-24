@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 import { List } from 'immutable';
 
 import FilterItems from '../filter-items/filter-items';
-import { CurrentContext } from '../../records/context-record';
+import { CurrentContext } from '../../records/filter-record';
+import SearchTypeItem from '../filter-search-type/filter-search-type';
+import { SearchTypes } from '../../constants/filter-constants';
 
 import './filter-widget.scss';
 
 class FilterWidget extends React.PureComponent {
     static propTypes = {
-        isOpenFilterWidget: PropTypes.bool.isRequired,
+        searchString: PropTypes.string.isRequired,
         onChangeStateContext: PropTypes.func.isRequired,
         filterId: PropTypes.string.isRequired,
         onChangeStateResult: PropTypes.func,
@@ -22,9 +24,10 @@ class FilterWidget extends React.PureComponent {
         filteredDemisions: PropTypes.instanceOf(List),
         contextsList: PropTypes.instanceOf(List),
         filteredResultsWithSort: PropTypes.instanceOf(List),
-        selectContext: PropTypes.instanceOf(List),
-        selectDemision: PropTypes.instanceOf(List),
-        selectResults: PropTypes.instanceOf(List)
+        selectedContext: PropTypes.instanceOf(List),
+        selectedDemision: PropTypes.instanceOf(List),
+        selectedResults: PropTypes.instanceOf(List),
+        onToggleWidget: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -35,9 +38,9 @@ class FilterWidget extends React.PureComponent {
         filteredDemisions: new List(),
         contextsList: new List(),
         filteredResultsWithSort: new List(),
-        selectContext: new List(),
-        selectDemision: new List(),
-        selectResults: new List()
+        selectedContext: new List(),
+        selectedDemision: new List(),
+        selectedResults: new List()
     };
 
     state = {
@@ -59,6 +62,10 @@ class FilterWidget extends React.PureComponent {
         });
     };
 
+    onSearchStringChange = (e) => {
+        this.props.onInputTitleSearch(this.props.filterId, e.target.value);
+    };
+
     render() {
         const {
             contextsList,
@@ -67,14 +74,14 @@ class FilterWidget extends React.PureComponent {
             selectedContext,
             selectedDemision,
             filterId,
-            isOpenFilterWidget,
             onChangeStateContext,
             dataFilter,
             onChangeStateResult,
             onChooseTypeSearch,
-            onInputTitleSearch,
             filteredDemisions,
-            onChangeStateDemission
+            searchString,
+            onChangeStateDemission,
+            onToggleWidget
         } = this.props;
 
         return (
@@ -87,16 +94,12 @@ class FilterWidget extends React.PureComponent {
                 onDrag={this.handleDrag}
                 onStop={this.handleStop}
             >
-                <div
-                    className={className('filter-container', {
-                        'filter-container--open': isOpenFilterWidget
-                    })}
-                    onClick={this.clickTest}
-                >
+                <div className={className('filter-container')}>
                     <div className="filter-container__content">
                         <div className="filter-container__header">
                             <div className="filter-container__icon" />
                             <div className="filter-container__label">FILTERS</div>
+                            <div className="filter-container__close" onClick={onToggleWidget} />
                         </div>
                         <div className="filter-container__main">
                             <div className="filter-container__main-content">
@@ -114,7 +117,7 @@ class FilterWidget extends React.PureComponent {
                                             filterId={filterId}
                                             filteredList={contextsList}
                                             onChangeState={onChangeStateContext}
-                                            selectItems={selectedContext}
+                                            selectedItems={selectedContext}
                                         />
                                     </div>
                                 </div>
@@ -134,7 +137,7 @@ class FilterWidget extends React.PureComponent {
                                             filterId={filterId}
                                             filteredList={filteredDemisions}
                                             onChangeState={onChangeStateDemission}
-                                            selectItems={selectedDemision}
+                                            selectedItems={selectedDemision}
                                         />
                                     </div>
                                 </div>
@@ -145,53 +148,27 @@ class FilterWidget extends React.PureComponent {
                                             <input
                                                 type="text"
                                                 className="filter-container__field-search"
-                                                value={dataFilter.get('searchTitle')}
-                                                onChange={e =>
-                                                    onInputTitleSearch({ filterId, titleSearch: e.target.value })
-                                                }
+                                                value={searchString}
+                                                onChange={this.onSearchStringChange}
                                             />
                                             <div className="filter-container__sorts">
-                                                <div
-                                                    className={className('filter-container__sorts-example', {
-                                                        'filter-container__sorts-example--focus':
-                                                            dataFilter.get('searchType') === 'exactMatch'
-                                                    })}
-                                                    onClick={() =>
-                                                        onChooseTypeSearch({ filterId, searchType: 'exactMatch' })
-                                                    }
-                                                >
-                                                    **
-                                                </div>
-                                                <div
-                                                    className={className('filter-container__sorts-example', {
-                                                        'filter-container__sorts-example--focus':
-                                                            dataFilter.get('searchType') === 'overlap'
-                                                    })}
-                                                    onClick={() =>
-                                                        onChooseTypeSearch({ filterId, searchType: 'overlap' })
-                                                    }
-                                                >
-                                                    *
-                                                </div>
-                                                <div
-                                                    className={className('filter-container__sorts-example', {
-                                                        'filter-container__sorts-example--focus':
-                                                            dataFilter.get('searchType') === 'beginWith'
-                                                    })}
-                                                    onClick={() =>
-                                                        onChooseTypeSearch({ filterId, searchType: 'beginWith' })
-                                                    }
-                                                >
-                                                    A-Z
-                                                </div>
+                                                {Object.keys(SearchTypes).map(item => (
+                                                    <SearchTypeItem
+                                                        key={SearchTypes[item].title}
+                                                        dataFilter={dataFilter}
+                                                        symbol={SearchTypes[item].symbol}
+                                                        type={SearchTypes[item].title}
+                                                        onChooseTypeSearch={onChooseTypeSearch}
+                                                        filterId={filterId}
+                                                    />
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {dataFilter.get('searchType')}
                                 <div className="filter-container__list-results">
                                     <FilterItems
-                                        selectItems={selectedResults}
+                                        selectedItems={selectedResults}
                                         filterId={filterId}
                                         filteredList={filteredResultsWithSort}
                                         onChangeState={onChangeStateResult}

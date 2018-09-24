@@ -4,6 +4,8 @@ export const CurrentContext = new Record({
     searchTitle: '',
     searchType: 'exactMatch',
     savingData: null,
+    isSaving: false,
+    isRestoring: false,
     contextIds: new Map()
 });
 

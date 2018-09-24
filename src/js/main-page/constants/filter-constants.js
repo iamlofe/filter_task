@@ -1,14 +1,14 @@
-export const searchTypes = {
-    beginWith: {
+export const SearchTypes = {
+    BEGIN_WITH: {
         title: 'beginWith',
-        condition: (inputString, settingsSearch) => inputString.startsWith(settingsSearch.searchTitle)
+        symbol: '*'
     },
-    exactMatch: {
+    EXACT_MATCH: {
         title: 'exactMatch',
-        condition: (inputString, settingsSearch) => inputString === settingsSearch.searchTitle
+        symbol: '**'
     },
-    overlap: {
+    OVERLAP: {
         title: 'overlap',
-        condition: (inputString, settingsSearch) => inputString.includes(settingsSearch.searchTitle)
+        symbol: 'A-Z'
     }
 };

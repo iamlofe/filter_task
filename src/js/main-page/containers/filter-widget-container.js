@@ -26,6 +26,7 @@ export default connect(
     (state, props) => ({
         initialFilterData: state.mainReducer.get('initialDataFilter'),
         dataFilter: state.filterReducer.get(props.filterId),
+        searchString: state.filterReducer.getIn([props.filterId, 'searchTitle']),
         contextsList: contextsList(state),
         demisionsList: demisionsList(state),
         resultsList: resultsList(state),
@@ -42,7 +43,7 @@ export default connect(
             dispatch(changeStateDemission(filterId, contextId, demisionId)),
         onChangeStateResult: (filterId, contextId, demisionId, resultId) =>
             dispatch(changeStateResult(filterId, contextId, demisionId, resultId)),
-        onChooseTypeSearch: type => dispatch(chooseTypeSearch(type)),
-        onInputTitleSearch: infoSearch => dispatch(inputTitleSearch(infoSearch))
+        onChooseTypeSearch: (filterId, type) => dispatch(chooseTypeSearch(filterId, type)),
+        onInputTitleSearch: (filterId, titleSearch) => dispatch(inputTitleSearch(filterId, titleSearch))
     })
 )(FilterWidget);

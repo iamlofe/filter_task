@@ -2,13 +2,9 @@
     position: absolute;
     z-index: 1;
 
-    display: none;
+    display: inline-block;
 
     margin: 5px;
-
-    &--open {
-        display: inline-block;
-    }
 
     &__state-container {
         display: flex;
@@ -124,25 +120,6 @@
         margin: 10px 0;
     }
 
-    &__sorts-example {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 35px;
-        height: 20px;
-        margin-right: 5px;
-
-        color: #fff;
-        border: 0.5px solid #fff;
-        background: #242627;
-
-        font-size: 11px;
-    }
-    &__sorts-example--focus {
-        border: 2px solid #fff;
-    }
-
     &__context-drop,
     &__demisions-drop {
         display: flex;
@@ -172,7 +149,6 @@
         border-top: 2px solid #1e7eda;
     }
 
-    //
     &__dropdown-list-demisions {
         position: absolute;
         z-index: 1;
@@ -261,5 +237,17 @@
         height: 400px;
         margin: 5px;
         padding: 5px;
+    }
+    &__close {
+        width: 15px;
+        height: 15px;
+        margin-left: auto;
+
+        cursor: pointer;
+
+        background-image: url('../../../../img/close.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
     }
 }

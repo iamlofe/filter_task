@@ -11,7 +11,8 @@ class FilterList extends React.PureComponent {
         onLoadData: PropTypes.func.isRequired,
         onCreateDisplay: PropTypes.func.isRequired,
         isStatusLoadData: PropTypes.bool.isRequired,
-        filterIds: PropTypes.arrayOf(PropTypes.string)
+        filterIds: PropTypes.arrayOf(PropTypes.string),
+        deleteFilter: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -21,6 +22,10 @@ class FilterList extends React.PureComponent {
     componentDidMount() {
         this.props.onLoadData();
     }
+
+    deleteFilterUpdate = (filterId) => {
+        this.props.deleteFilter(filterId);
+    };
 
     render() {
         const { isStatusLoadData, filterIds, onCreateDisplay } = this.props;
@@ -33,7 +38,7 @@ class FilterList extends React.PureComponent {
                 )}
                 <div className="filter-container__state-container">
                     {filterIds.map(filterId => (
-                        <Filter key={filterId} filterId={filterId} />
+                        <Filter key={filterId} filterId={filterId} onDeleteFilterUpdate={this.deleteFilterUpdate} />
                     ))}
                 </div>
             </div>

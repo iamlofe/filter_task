@@ -9,10 +9,13 @@ import {
     chooseTypeSearch,
     inputTitleSearch,
     onSaveStateWidget,
-    onRestoreSavingData
+    onRestoreSavingData,
+    changeStateSavingData,
+    deleteFilter,
+    changeStateRestoringData
 } from '../actions/filter-actions';
 
-import { CurrentContext } from '../records/context-record';
+import { CurrentContext } from '../records/filter-record';
 
 import idGenerator from '../tools/generation-id-tool';
 
@@ -44,15 +47,18 @@ export default handleActions(
                 index === -1 ? listIds.push(resultId) : listIds.splice(index, 1)
             );
         },
-        [chooseTypeSearch]: (state, { payload: { filterId, searchType } }) =>
-            state.setIn([filterId, 'searchType'], searchType),
-        [onSaveStateWidget]: (state, { payload: { filterId, dataWidget } }) =>
-            state.setIn([filterId, 'savingData'], dataWidget),
-        [onRestoreSavingData]: (state, { payload: { filterId } }) =>
-            state.set(filterId, state.getIn([filterId, 'savingData'])),
+        [chooseTypeSearch]: (state, { payload: { filterId, type } }) => state.setIn([filterId, 'searchType'], type),
+        [onSaveStateWidget]: (state, { payload: { filterId } }) =>
+            state.setIn([filterId, 'savingData'], state.getIn([filterId, 'contextIds'])),
+        [onRestoreSavingData]: (state, { payload: { filterId, data } }) => state.setIn([filterId, 'contextIds'], data),
         [inputTitleSearch]: (state, { payload: { filterId, titleSearch } }) =>
             state.setIn([filterId, 'searchTitle'], titleSearch),
-        [createDisplay]: state => state.set(idGenerator(), new CurrentContext())
+        [changeStateSavingData]: (state, { payload: { filterId } }) =>
+            state.setIn([filterId, 'isSaving'], !state.getIn([filterId, 'isSaving'])),
+        [createDisplay]: state => state.set(idGenerator(), new CurrentContext()),
+        [changeStateRestoringData]: (state, { payload: { filterId } }) =>
+            state.setIn([filterId, 'isRestoring'], !state.getIn([filterId, 'isRestoring'])),
+        [deleteFilter]: (state, { payload: { filterId } }) => state.delete(filterId)
     },
     initialState
 );

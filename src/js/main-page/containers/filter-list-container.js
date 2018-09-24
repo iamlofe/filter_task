@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import FilterList from '../components/filter-list/filter-list';
 
-import { createDisplay } from '../actions/filter-actions';
+import { createDisplay, deleteFilter as deleteFilterAction } from '../actions/filter-actions';
 
 import { loadData } from '../../main/actions/main-actions';
 
@@ -14,6 +14,7 @@ export default connect(
     }),
     dispatch => ({
         onLoadData: () => dispatch(loadData()),
-        onCreateDisplay: () => dispatch(createDisplay())
+        onCreateDisplay: () => dispatch(createDisplay()),
+        deleteFilter: filterId => dispatch(deleteFilterAction(filterId))
     })
 )(FilterList);
