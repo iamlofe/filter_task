@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-import parseTool from 'main-page/tools/parsing-local-storage-tool';
+import parseTool from '../tools/parse-local-storage-tool';
 
 import LocalStorage from '../tools/local-storage-tool';
 
@@ -43,9 +43,14 @@ export const changeStateRestoringData = createAction('CHANGE_STATE_RESTORING_DAT
 const saveData = (getState, filterId) =>
     new Promise((res) => {
         setTimeout(() => {
-            const savingData = getState()
-                .filterReducer.getIn([filterId, 'contextIds'])
-                .toJS();
+            const savingData = {
+                contextIds: getState()
+                    .filterReducer.getIn([filterId, 'contextIds'])
+                    .toJS(),
+                searchTitle: getState().filterReducer.getIn([filterId, 'searchTitle']),
+                searchType: getState().filterReducer.getIn([filterId, 'searchType'])
+            };
+
             LocalStorage.set(filterId, JSON.stringify(savingData));
 
             res();
@@ -57,6 +62,7 @@ const restoreData = filterId =>
         setTimeout(() => {
             const restoringData = LocalStorage.get(filterId);
             const waitingDataParse = JSON.parse(restoringData);
+
             res(parseTool(waitingDataParse));
         }, 1000);
     });
@@ -64,12 +70,14 @@ const restoreData = filterId =>
 export const saveDataWidget = filterId => async (dispatch, getState) => {
     dispatch(changeStateSavingData(filterId));
     await saveData(getState, filterId);
+
     dispatch(changeStateSavingData(filterId));
 };
 
 export const restoreDataWidget = filterId => async (dispatch) => {
     dispatch(changeStateRestoringData(filterId));
     const data = await restoreData(filterId);
+
     dispatch(onRestoreSavingData(filterId, data));
     dispatch(changeStateRestoringData(filterId));
 };

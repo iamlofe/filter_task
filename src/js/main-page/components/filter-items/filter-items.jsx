@@ -8,28 +8,21 @@ import './filter-items.scss';
 
 class FilterItems extends React.PureComponent {
     static propTypes = {
-        filteredList: PropTypes.instanceOf(List),
-        selectedItems: PropTypes.instanceOf(List),
+        filteredList: PropTypes.instanceOf(List).isRequired,
+        selectedItems: PropTypes.instanceOf(List).isRequired,
         filterId: PropTypes.string.isRequired,
-        onChangeState: PropTypes.func
+        onChangeState: PropTypes.func.isRequired,
+        displayClass: PropTypes.string
     };
 
     static defaultProps = {
-        filteredList: new List(),
-        selectedItems: new List(),
-        onChangeState: () => {}
+        displayClass: ''
     };
+
     render() {
         const {
             filteredList, filterId, onChangeState, selectedItems, displayClass
         } = this.props;
-
-        const checkboxProps = {
-            filterId,
-            onChangeState,
-            selectedItems,
-            displayClass
-        };
 
         return (
             <React.Fragment>
@@ -38,7 +31,10 @@ class FilterItems extends React.PureComponent {
                         <FilterCheckbox
                             key={filteredItem.get('id')}
                             filteredItem={filteredItem}
-                            {...checkboxProps}
+                            filterId={filterId}
+                            onChangeState={onChangeState}
+                            selectedItems={selectedItems}
+                            displayClass={displayClass}
                             checked={selectedItems.includes(filteredItem.get('id'))}
                         />
                     ))}

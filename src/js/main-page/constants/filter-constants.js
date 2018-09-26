@@ -1,14 +1,11 @@
 export const SearchTypes = {
-    BEGIN_WITH: {
-        title: 'beginWith',
-        symbol: '*'
-    },
-    EXACT_MATCH: {
-        title: 'exactMatch',
-        symbol: '**'
-    },
-    OVERLAP: {
-        title: 'overlap',
-        symbol: 'A-Z'
-    }
+    BEGIN_WITH: 'beginWith',
+    EXACT_MATCH: 'exactMatch',
+    OVERLAP: 'overlap'
+};
+
+export const SearchTypesLabels = {
+    [SearchTypes.BEGIN_WITH]: '*',
+    [SearchTypes.EXACT_MATCH]: '**',
+    [SearchTypes.OVERLAP]: 'A-Z'
 };

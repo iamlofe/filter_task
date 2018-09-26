@@ -1,9 +1,9 @@
-import MainPage from 'main-page/components/main-page/main-page';
+import FilterList from 'main-page/containers/filter-list-container';
 
 export default [
     {
         path: '/',
-        component: MainPage,
+        component: FilterList,
         exact: true
     }
 ];

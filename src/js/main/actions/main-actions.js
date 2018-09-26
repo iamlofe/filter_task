@@ -6,11 +6,13 @@ import dataFilter from '../../../../data.json';
 
 export const getDataFilter = createAction('LOAD_DATA', data => data);
 
-const getData = () => new Promise((res) => {
-    setTimeout(() => {
-        res(dataFilter);
-    }, 1000);
-});
+const getData = () =>
+    new Promise((res) => {
+        setTimeout(() => {
+            res(dataFilter);
+        }, 1000);
+    });
+// make parse above. there is no start loading action
 
 export const loadData = () => async (dispatch) => {
     const data = await getData();

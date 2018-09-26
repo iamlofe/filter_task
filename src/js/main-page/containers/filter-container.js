@@ -16,10 +16,11 @@ import {
     selectedContext,
     selectedDemision,
     selectedResults,
-    contextsList,
-    demisionsList,
-    resultsList,
-    getIsRestoringData
+    contexts,
+    demisions,
+    results,
+    getIsRestoringData,
+    filterIdsSelector
 } from '../selectors/filter-selector';
 
 export default compose(
@@ -51,17 +52,17 @@ export default compose(
             selectedContext: selectedContext(state, props),
             selectedDemision: selectedDemision(state, props),
             selectedResults: selectedResults(state, props),
-            contextsList: contextsList(state),
-            demisionsList: demisionsList(state),
-            resultsList: resultsList(state),
+            contexts: contexts(state),
+            demisions: demisions(state),
+            results: results(state),
 
-            filterIds: state.filterReducer.keySeq().toArray()
+            filterIds: filterIdsSelector(state)
         }),
         dispatch => ({
             restoreDataWidget: filterId => dispatch(restoreDataWidgetAction(filterId)),
             saveDataWidget: filterId => dispatch(saveDataWidgetAction(filterId)),
             onRestoreSavingData: filterId => dispatch(onRestoreSavingDataAction(filterId)),
-            deleteFilter: filterId => dispatch(deleteFilterAction(filterId))
+            onDeleteFilter: filterId => dispatch(deleteFilterAction(filterId))
         })
     ),
     withHandlers({
@@ -74,8 +75,8 @@ export default compose(
         onSaveDataWidget: ({ filterId, saveDataWidget }) => () => {
             saveDataWidget(filterId);
         },
-        onDeleteFilter: ({ filterId, deleteFilter }) => () => {
-            deleteFilter(filterId);
+        onDeleteFilter: ({ filterId, onDeleteFilter }) => () => {
+            onDeleteFilter(filterId);
         }
     }),
     pure

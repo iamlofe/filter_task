@@ -6,6 +6,7 @@ import Portal from 'shared/components/portal/portal';
 import Button from 'shared/components/button-filter/button-filter';
 import FilterState from 'main-page/components/filter-state/filter-state';
 import FilterWidget from 'main-page/containers/filter-widget-container';
+import { CurrentContext } from '../../records/filter-record';
 
 import './filter.scss';
 
@@ -20,16 +21,21 @@ const DisplayWidget = ({
     selectedContext,
     selectedDemision,
     selectedResults,
-    contextsList,
-    demisionsList,
-    resultsList,
+    contexts,
+    demisions,
+    results,
     onDeleteFilter,
-    isRestoringData
+    isRestoringData,
+    dataWidget
 }) => (
     <div className="filter-container__state">
         <div className="filter-container__state-content">
             <div className="filter-container__space-buttons">
-                <Button className="filter-container__button_open-filter" onClick={onToggleWidget} label="Open" />
+                <Button
+                    className="filter-container__button_open-filter"
+                    onClick={onToggleWidget}
+                    label={isWidgetOpen ? 'Close' : 'Open'}
+                />
                 <Button className="filter-container__button_delete-filter" onClick={onDeleteFilter} label="Delete" />
 
                 <Button
@@ -48,9 +54,21 @@ const DisplayWidget = ({
 
             <div className="filter-container__display-state-container">
                 <div className="filter-container__display-state">
-                    <FilterState label="Context" selectedItems={selectedContext} listItems={contextsList} />
-                    <FilterState label="Demisions" selectedItems={selectedDemision} listItems={demisionsList} />
-                    <FilterState label="Results" selectedItems={selectedResults} listItems={resultsList} />
+                    <div className="filter-container__parametrs-search">
+                        {dataWidget.get('searchTitle') && (
+                            <div className="filter-container__type-search">
+                                Type: <span>{dataWidget.get('searchType')}</span>
+                            </div>
+                        )}
+                        {dataWidget.get('searchTitle') && (
+                            <div className="filter-container__string-search">
+                                Search: <span>{dataWidget.get('searchTitle')}</span>
+                            </div>
+                        )}
+                    </div>
+                    <FilterState label="Context" selectedItems={selectedContext} listItems={contexts} />
+                    <FilterState label="Demisions" selectedItems={selectedDemision} listItems={demisions} />
+                    <FilterState label="Results" selectedItems={selectedResults} listItems={results} />
                 </div>
                 {isWidgetOpen && (
                     <Portal>
@@ -73,11 +91,12 @@ DisplayWidget.propTypes = {
     selectedContext: PropTypes.instanceOf(List).isRequired,
     selectedDemision: PropTypes.instanceOf(List).isRequired,
     selectedResults: PropTypes.instanceOf(List).isRequired,
-    contextsList: PropTypes.instanceOf(List).isRequired,
-    demisionsList: PropTypes.instanceOf(List).isRequired,
-    resultsList: PropTypes.instanceOf(List).isRequired,
+    contexts: PropTypes.instanceOf(List).isRequired,
+    demisions: PropTypes.instanceOf(List).isRequired,
+    results: PropTypes.instanceOf(List).isRequired,
     onDeleteFilter: PropTypes.func.isRequired,
-    isRestoringData: PropTypes.bool.isRequired
+    isRestoringData: PropTypes.bool.isRequired,
+    dataWidget: PropTypes.instanceOf(CurrentContext).isRequired
 };
 
 export default DisplayWidget;

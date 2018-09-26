@@ -15,6 +15,8 @@ import {
     changeStateRestoringData
 } from '../actions/filter-actions';
 
+import { SearchTypes } from '../constants/filter-constants';
+
 import { CurrentContext } from '../records/filter-record';
 
 import idGenerator from '../tools/generation-id-tool';
@@ -50,12 +52,27 @@ export default handleActions(
         [chooseTypeSearch]: (state, { payload: { filterId, type } }) => state.setIn([filterId, 'searchType'], type),
         [onSaveStateWidget]: (state, { payload: { filterId } }) =>
             state.setIn([filterId, 'savingData'], state.getIn([filterId, 'contextIds'])),
-        [onRestoreSavingData]: (state, { payload: { filterId, data } }) => state.setIn([filterId, 'contextIds'], data),
+        [onRestoreSavingData]: (state, { payload: { filterId, data } }) =>
+            state
+                .setIn([filterId, 'contextIds'], data.get('contextIds'))
+                .setIn([filterId, 'searchTitle'], data.get('searchTitle'))
+                .setIn([filterId, 'searchType'], data.get('searchType')),
         [inputTitleSearch]: (state, { payload: { filterId, titleSearch } }) =>
             state.setIn([filterId, 'searchTitle'], titleSearch),
         [changeStateSavingData]: (state, { payload: { filterId } }) =>
             state.setIn([filterId, 'isSaving'], !state.getIn([filterId, 'isSaving'])),
-        [createDisplay]: state => state.set(idGenerator(), new CurrentContext()),
+        [createDisplay]: state =>
+            state.set(
+                idGenerator(),
+                new CurrentContext({
+                    searchTitle: '',
+                    searchType: SearchTypes.BEGIN_WITH,
+                    savingData: null,
+                    isSaving: false,
+                    isRestoring: false,
+                    contextIds: new Map()
+                })
+            ),
         [changeStateRestoringData]: (state, { payload: { filterId } }) =>
             state.setIn([filterId, 'isRestoring'], !state.getIn([filterId, 'isRestoring'])),
         [deleteFilter]: (state, { payload: { filterId } }) => state.delete(filterId)

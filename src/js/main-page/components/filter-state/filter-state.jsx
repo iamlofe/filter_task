@@ -7,13 +7,8 @@ import './filter-state.scss';
 class FilterState extends React.PureComponent {
     static propTypes = {
         label: PropTypes.string.isRequired,
-        listItems: PropTypes.instanceOf(List),
-        selectedItems: PropTypes.instanceOf(List)
-    };
-
-    static defaultProps = {
-        listItems: new List(),
-        selectedItems: new List()
+        listItems: PropTypes.instanceOf(List).isRequired,
+        selectedItems: PropTypes.instanceOf(List).isRequired
     };
 
     render() {
@@ -21,15 +16,13 @@ class FilterState extends React.PureComponent {
 
         return (
             <React.Fragment>
-                {!!selectedItems.count() && (
-                    <div className="filter-container__display-context" onClick={this.test}>
+                {!selectedItems.isEmpty() && (
+                    <div className="filter-container__display-context">
                         <div className="filter-container__display-context-title">{label}:</div>
                         <div className="filter-container__display-context-list">
-                            {listItems.map((item) => {
-                                if (selectedItems.includes(item.get('id'))) {
-                                    return <div key={item.get('id')}>{item.get('title')}</div>;
-                                }
-                            })}
+                            {listItems.filter(item => selectedItems.includes(item.get('id'))).map(item => (
+                                <div key={item.get('id')}>{item.get('title')}</div>
+                            ))}
                         </div>
                     </div>
                 )}

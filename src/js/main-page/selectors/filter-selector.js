@@ -7,6 +7,8 @@ const getFilterSelected = (state, props) => state.filterReducer.getIn([props.fil
 
 const getFilter = state => state.mainReducer.get('initialDataFilter');
 
+export const filterIdsSelector = state => state.filterReducer.keySeq().toArray();
+
 export const getIsSavingData = (state, props) => state.filterReducer.getIn([props.filterId, 'isSaving']);
 
 export const getIsRestoringData = (state, props) => state.filterReducer.getIn([props.filterId, 'isRestoring']);
@@ -30,22 +32,22 @@ export const selectedResults = createSelector(getFilterSelected, (contexts) => {
     return new List(selectResultsList.reduce((acc, element) => acc.concat(element.toArray()), []));
 });
 
-export const contextsList = createSelector(
+export const contexts = createSelector(
     getFilter,
-    contexts => new List(contexts.reduce((acc, element) => acc.concat(element), []))
+    context => new List(context.reduce((acc, element) => acc.concat(element), []))
 );
 
-export const demisionsList = createSelector(
-    contextsList,
-    contexts => new List(contexts.reduce((acc, element) => acc.concat(element.get('listsDimensions').toArray()), []))
+export const demisions = createSelector(
+    contexts,
+    context => new List(context.reduce((acc, element) => acc.concat(element.get('listsDimensions').toArray()), []))
 );
 
-export const resultsList = createSelector(
-    demisionsList,
-    demisions => new List(demisions.reduce((acc, element) => acc.concat(...element.get('listsResults')), []))
+export const results = createSelector(
+    demisions,
+    demision => new List(demision.reduce((acc, element) => acc.concat(...element.get('listsResults')), []))
 );
 
-export const filteredDemisions = createSelector(selectedContext, contextsList, (contextIds, contextList) => {
+export const filteredDemisions = createSelector(selectedContext, contexts, (contextIds, contextList) => {
     let filteredDemisionsList = new List();
 
     contextList.forEach((context) => {
@@ -81,9 +83,9 @@ export const filteredResults = createSelector(filteredDemisions, selectedDemisio
     });
 });
 
-const filterResults = (results, condition, settingSearch) => {
+const filterResults = (resultsItems, condition, settingSearch) => {
     let listResultsBeginWith = new List();
-    results.forEach((res) => {
+    resultsItems.forEach((res) => {
         if (condition(res.title, settingSearch)) {
             listResultsBeginWith = listResultsBeginWith.push(res);
         }
@@ -92,13 +94,16 @@ const filterResults = (results, condition, settingSearch) => {
 };
 
 export const searchConditions = {
-    [SearchTypes.BEGIN_WITH.title]: (inputString, settingsSearch) => inputString.startsWith(settingsSearch.searchTitle),
-    [SearchTypes.EXACT_MATCH.title]: (inputString, settingsSearch) => inputString === settingsSearch.searchTitle,
-    [SearchTypes.OVERLAP.title]: (inputString, settingsSearch) => inputString.includes(settingsSearch.searchTitle)
+    [SearchTypes.BEGIN_WITH]: (inputString, settingsSearch) => inputString.startsWith(settingsSearch.searchTitle),
+    [SearchTypes.EXACT_MATCH]: (inputString, settingsSearch) => inputString === settingsSearch.searchTitle,
+    [SearchTypes.OVERLAP]: (inputString, settingsSearch) => inputString.includes(settingsSearch.searchTitle)
 };
 
-export const filteredResultsWithSort = createSelector(filteredResults, getInfoSearch, (results, settingsSearch) => {
-    const condition = searchConditions[settingsSearch.searchType];
-
-    return filterResults(results, condition, settingsSearch);
-});
+export const filteredResultsWithSort = createSelector(
+    filteredResults,
+    getInfoSearch,
+    (resultsItems, settingsSearch) => {
+        const condition = searchConditions[settingsSearch.searchType];
+        return filterResults(resultsItems, condition, settingsSearch);
+    }
+);

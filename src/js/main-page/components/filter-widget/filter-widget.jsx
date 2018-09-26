@@ -7,41 +7,32 @@ import { List } from 'immutable';
 import FilterItems from '../filter-items/filter-items';
 import { CurrentContext } from '../../records/filter-record';
 import SearchTypeItem from '../filter-search-type/filter-search-type';
-import { SearchTypes } from '../../constants/filter-constants';
+import { SearchTypes, SearchTypesLabels } from '../../constants/filter-constants';
 
 import './filter-widget.scss';
+
+const searchTypes = Object.values(SearchTypes);
 
 class FilterWidget extends React.PureComponent {
     static propTypes = {
         searchString: PropTypes.string.isRequired,
         onChangeStateContext: PropTypes.func.isRequired,
         filterId: PropTypes.string.isRequired,
-        onChangeStateResult: PropTypes.func,
-        onChooseTypeSearch: PropTypes.func,
-        onInputTitleSearch: PropTypes.func,
-        onChangeStateDemission: PropTypes.func,
+        onChangeStateResult: PropTypes.func.isRequired,
+        onChooseTypeSearch: PropTypes.func.isRequired,
+        onInputTitleSearch: PropTypes.func.isRequired,
+        onChangeStateDemission: PropTypes.func.isRequired,
         dataFilter: PropTypes.instanceOf(CurrentContext).isRequired,
-        filteredDemisions: PropTypes.instanceOf(List),
-        contextsList: PropTypes.instanceOf(List),
-        filteredResultsWithSort: PropTypes.instanceOf(List),
-        selectedContext: PropTypes.instanceOf(List),
-        selectedDemision: PropTypes.instanceOf(List),
-        selectedResults: PropTypes.instanceOf(List),
+        filteredDemisions: PropTypes.instanceOf(List).isRequired,
+        contexts: PropTypes.instanceOf(List).isRequired,
+        filteredResultsWithSort: PropTypes.instanceOf(List).isRequired,
+        selectedContext: PropTypes.instanceOf(List).isRequired,
+        selectedDemision: PropTypes.instanceOf(List).isRequired,
+        selectedResults: PropTypes.instanceOf(List).isRequired,
         onToggleWidget: PropTypes.func.isRequired
     };
 
-    static defaultProps = {
-        onChangeStateResult: () => {},
-        onChooseTypeSearch: () => {},
-        onInputTitleSearch: () => {},
-        onChangeStateDemission: () => {},
-        filteredDemisions: new List(),
-        contextsList: new List(),
-        filteredResultsWithSort: new List(),
-        selectedContext: new List(),
-        selectedDemision: new List(),
-        selectedResults: new List()
-    };
+    static defaultProps = {};
 
     state = {
         isOpenContexts: false,
@@ -68,7 +59,7 @@ class FilterWidget extends React.PureComponent {
 
     render() {
         const {
-            contextsList,
+            contexts,
             filteredResultsWithSort,
             selectedResults,
             selectedContext,
@@ -115,7 +106,7 @@ class FilterWidget extends React.PureComponent {
                                     >
                                         <FilterItems
                                             filterId={filterId}
-                                            filteredList={contextsList}
+                                            filteredList={contexts}
                                             onChangeState={onChangeStateContext}
                                             selectedItems={selectedContext}
                                         />
@@ -152,12 +143,12 @@ class FilterWidget extends React.PureComponent {
                                                 onChange={this.onSearchStringChange}
                                             />
                                             <div className="filter-container__sorts">
-                                                {Object.keys(SearchTypes).map(item => (
+                                                {searchTypes.map(searchType => (
                                                     <SearchTypeItem
-                                                        key={SearchTypes[item].title}
+                                                        key={searchType}
                                                         dataFilter={dataFilter}
-                                                        symbol={SearchTypes[item].symbol}
-                                                        type={SearchTypes[item].title}
+                                                        symbol={SearchTypesLabels[searchType]}
+                                                        type={searchType}
                                                         onChooseTypeSearch={onChooseTypeSearch}
                                                         filterId={filterId}
                                                     />

@@ -1,19 +1,10 @@
-import { Record, Map } from 'immutable';
+import { Record } from 'immutable';
 
 export const CurrentContext = new Record({
-    searchTitle: '',
-    searchType: 'exactMatch',
+    searchTitle: null,
+    searchType: null,
     savingData: null,
-    isSaving: false,
-    isRestoring: false,
-    contextIds: new Map()
+    isSaving: null,
+    isRestoring: null,
+    contextIds: null
 });
-
-export default class CurrentContextRecord extends CurrentContext {
-    static parse(info) {
-        return new CurrentContextRecord({
-            searchTitle: info.searchTitle,
-            searchType: info.searchType
-        });
-    }
-}
