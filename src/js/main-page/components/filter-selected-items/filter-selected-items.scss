@@ -1,0 +1,15 @@
+.filter-container {
+    &__list-selected-items {
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        color: rgb(132, 130, 243);
+        p {
+            display: inline-block;
+
+            margin-left: 2px;
+        }
+    }
+}

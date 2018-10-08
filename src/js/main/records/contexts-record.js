@@ -2,7 +2,7 @@ import { Record, List } from 'immutable';
 
 import RecordDemisions from './dimensions-record';
 
-const Context = new Record({
+export const Context = new Record({
     id: null,
     contextId: null,
     title: null,

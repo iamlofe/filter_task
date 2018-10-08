@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filter search type component is shallow rendered without crashing 1`] = `
+<div
+  className="filter-container__sorts-example"
+  onClick={[Function]}
+>
+  *
+</div>
+`;

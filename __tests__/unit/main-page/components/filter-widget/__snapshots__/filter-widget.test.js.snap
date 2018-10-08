@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account component is shallow rendered without crashing 1`] = `
+<Draggable
+  allowAnyClick={false}
+  axis="both"
+  bounds={false}
+  cancel={null}
+  defaultClassName="react-draggable"
+  defaultClassNameDragged="react-draggable-dragged"
+  defaultClassNameDragging="react-draggable-dragging"
+  defaultPosition={
+    Object {
+      "x": 0,
+      "y": 0,
+    }
+  }
+  disabled={false}
+  enableUserSelectHack={true}
+  grid={
+    Array [
+      0.01,
+      0.01,
+    ]
+  }
+  handle=".filter-container__icon"
+  offsetParent={null}
+  onDrag={[Function]}
+  onMouseDown={[Function]}
+  onStart={[Function]}
+  onStop={[Function]}
+  position={null}
+  transform={null}
+>
+  <div
+    className="filter-container"
+  >
+    <div
+      className="filter-container__content"
+    >
+      <div
+        className="filter-container__header"
+      >
+        <div
+          className="filter-container__icon"
+        />
+        <div
+          className="filter-container__label"
+        >
+          FILTERS
+        </div>
+        <div
+          className="filter-container__close"
+          onClick={[MockFunction]}
+        />
+      </div>
+      <div
+        className="filter-container__main"
+      >
+        <div
+          className="filter-container__main-content"
+        >
+          <div
+            className="filter-container__context"
+          >
+            <div
+              className="filter-container__context-drop"
+              onClick={[Function]}
+            >
+              <div
+                className="filter-container__icon-drop-down"
+              />
+              <p
+                className="filter-container__name"
+              >
+                Context
+              </p>
+              <FilterSelectedItems
+                filteredList={Immutable.List []}
+                selectedItems={Immutable.List []}
+              />
+            </div>
+            <div
+              className="filter-container__dropdown-list-context"
+            >
+              <FilterItems
+                displayClass=""
+                filterId="test"
+                filteredList={Immutable.List []}
+                onChangeState={[MockFunction]}
+                selectedItems={Immutable.List []}
+              />
+            </div>
+          </div>
+          <div
+            className="filter-container__demisions"
+          >
+            <div
+              className="filter-container__demisions-drop"
+              onClick={[Function]}
+            >
+              <div
+                className="filter-container__icon-drop-down"
+              />
+              <p
+                className="filter-container__name"
+              >
+                Demisions
+              </p>
+              <FilterSelectedItems
+                filteredList={Immutable.List []}
+                selectedItems={Immutable.List []}
+              />
+            </div>
+            <div
+              className="filter-container__dropdown-list-demisions"
+            >
+              <FilterItems
+                displayClass=""
+                filterId="test"
+                filteredList={Immutable.List []}
+                onChangeState={[MockFunction]}
+                selectedItems={Immutable.List []}
+              />
+            </div>
+          </div>
+          <div
+            className="filter-container__search"
+          >
+            <div
+              className="filter-container__container-search"
+            >
+              <div
+                className="filter-container__icon-search"
+              />
+              <div
+                className="filter-container__container-field"
+              >
+                <input
+                  className="filter-container__field-search"
+                  onChange={[Function]}
+                  type="text"
+                  value=""
+                />
+                <div
+                  className="filter-container__sorts"
+                >
+                  <SearchTypeItem
+                    dataFilter={
+                      Immutable.Record {
+                        "searchTitle": null,
+                        "searchType": null,
+                        "isSaving": null,
+                        "isRestoring": null,
+                        "contextIds": null,
+                      }
+                    }
+                    filterId="test"
+                    key="beginWith"
+                    onChooseTypeSearch={[MockFunction]}
+                    symbol="*"
+                    type="beginWith"
+                  />
+                  <SearchTypeItem
+                    dataFilter={
+                      Immutable.Record {
+                        "searchTitle": null,
+                        "searchType": null,
+                        "isSaving": null,
+                        "isRestoring": null,
+                        "contextIds": null,
+                      }
+                    }
+                    filterId="test"
+                    key="exactMatch"
+                    onChooseTypeSearch={[MockFunction]}
+                    symbol="**"
+                    type="exactMatch"
+                  />
+                  <SearchTypeItem
+                    dataFilter={
+                      Immutable.Record {
+                        "searchTitle": null,
+                        "searchType": null,
+                        "isSaving": null,
+                        "isRestoring": null,
+                        "contextIds": null,
+                      }
+                    }
+                    filterId="test"
+                    key="overlap"
+                    onChooseTypeSearch={[MockFunction]}
+                    symbol="A-Z"
+                    type="overlap"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="filter-container__list-results"
+          >
+            <FilterItems
+              displayClass=""
+              filterId="test"
+              filteredList={Immutable.List []}
+              onChangeState={[MockFunction]}
+              selectedItems={Immutable.List []}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Draggable>
+`;

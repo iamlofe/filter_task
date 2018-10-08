@@ -11,12 +11,11 @@ const FilterButtonOpenWidget = ({ onClick, label, className }) => (
 );
 
 FilterButtonOpenWidget.propTypes = {
-    onClick: PropTypes.func,
+    onClick: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
     className: PropTypes.string
 };
 FilterButtonOpenWidget.defaultProps = {
-    onClick: () => {},
     className: ''
 };
 

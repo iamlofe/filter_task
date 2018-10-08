@@ -26,7 +26,7 @@ class FilterItems extends React.PureComponent {
 
         return (
             <React.Fragment>
-                {filteredList &&
+                {!!filteredList.count() &&
                     filteredList.map(filteredItem => (
                         <FilterCheckbox
                             key={filteredItem.get('id')}
@@ -42,4 +42,5 @@ class FilterItems extends React.PureComponent {
         );
     }
 }
+
 export default FilterItems;

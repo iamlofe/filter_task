@@ -19,7 +19,7 @@ import { SearchTypes } from '../constants/filter-constants';
 
 import { CurrentContext } from '../records/filter-record';
 
-import idGenerator from '../tools/generation-id-tool';
+import { idGenerator } from '../tools/generation-id-tool';
 
 const initialState = new Map();
 
@@ -50,15 +50,15 @@ export default handleActions(
             );
         },
         [chooseTypeSearch]: (state, { payload: { filterId, type } }) => state.setIn([filterId, 'searchType'], type),
-        [onSaveStateWidget]: (state, { payload: { filterId } }) =>
-            state.setIn([filterId, 'savingData'], state.getIn([filterId, 'contextIds'])),
+        // [onSaveStateWidget]: (state, { payload: { filterId } }) =>
+        //     state.setIn([filterId, 'savingData'], state.getIn([filterId, 'contextIds'])),
         [onRestoreSavingData]: (state, { payload: { filterId, data } }) =>
             state
                 .setIn([filterId, 'contextIds'], data.get('contextIds'))
                 .setIn([filterId, 'searchTitle'], data.get('searchTitle'))
                 .setIn([filterId, 'searchType'], data.get('searchType')),
-        [inputTitleSearch]: (state, { payload: { filterId, titleSearch } }) =>
-            state.setIn([filterId, 'searchTitle'], titleSearch),
+        [inputTitleSearch]: (state, { payload: { filterId, searchTitle } }) =>
+            state.setIn([filterId, 'searchTitle'], searchTitle),
         [changeStateSavingData]: (state, { payload: { filterId } }) =>
             state.setIn([filterId, 'isSaving'], !state.getIn([filterId, 'isSaving'])),
         [createDisplay]: state =>

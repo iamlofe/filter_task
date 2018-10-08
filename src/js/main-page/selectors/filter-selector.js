@@ -1,11 +1,12 @@
 import { createSelector } from 'reselect';
 import { List } from 'immutable';
 
+import { sortTools } from 'main-page/tools/sorting-tools';
 import { SearchTypes } from '../constants/filter-constants';
 
-const getFilterSelected = (state, props) => state.filterReducer.getIn([props.filterId, 'contextIds']);
+export const getFilterSelected = (state, props) => state.filterReducer.getIn([props.filterId, 'contextIds']);
 
-const getFilter = state => state.mainReducer.get('initialDataFilter');
+export const getFilter = state => state.mainReducer.get('initialDataFilter');
 
 export const filterIdsSelector = state => state.filterReducer.keySeq().toArray();
 
@@ -70,17 +71,7 @@ export const filteredResults = createSelector(filteredDemisions, selectedDemisio
             });
         }
     });
-    return filteredResultsList.sort((prev, next) => {
-        if (prev.get('title') > next.get('title')) {
-            return 1;
-        }
-
-        if (prev.get('title') < next.get('title')) {
-            return -1;
-        }
-
-        return 0;
-    });
+    return sortTools(filteredResultsList);
 });
 
 const filterResults = (resultsItems, condition, settingSearch) => {

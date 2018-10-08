@@ -2,4 +2,29 @@
     &__sorts-example {
         cursor: pointer;
     }
+
+    &__icon-drop-down {
+        min-width: 13px;
+        min-height: 13px;
+
+        background-image: url(../../../../img/drop-down-arrow.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        font-size: 13px;
+    }
+
+    &__context-drop {
+        display: flex;
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        color: rgb(132, 130, 243);
+        p {
+            margin-left: 2px;
+        }
+    }
 }

@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { List } from 'immutable';
 
 import FilterItems from '../filter-items/filter-items';
+
+import FilterSelectedItems from '../filter-selected-items/filter-selected-items';
+
 import { CurrentContext } from '../../records/filter-record';
 import SearchTypeItem from '../filter-search-type/filter-search-type';
 import { SearchTypes, SearchTypesLabels } from '../../constants/filter-constants';
@@ -31,8 +34,6 @@ class FilterWidget extends React.PureComponent {
         selectedResults: PropTypes.instanceOf(List).isRequired,
         onToggleWidget: PropTypes.func.isRequired
     };
-
-    static defaultProps = {};
 
     state = {
         isOpenContexts: false,
@@ -98,6 +99,7 @@ class FilterWidget extends React.PureComponent {
                                     <div className="filter-container__context-drop" onClick={this.onOpenContexts}>
                                         <div className="filter-container__icon-drop-down" />
                                         <p className="filter-container__name">Context</p>
+                                        <FilterSelectedItems filteredList={contexts} selectedItems={selectedContext} />
                                     </div>
                                     <div
                                         className={className('filter-container__dropdown-list-context', {
@@ -117,6 +119,10 @@ class FilterWidget extends React.PureComponent {
                                     <div className="filter-container__demisions-drop" onClick={this.onOpenDemissions}>
                                         <div className="filter-container__icon-drop-down" />
                                         <p className="filter-container__name">Demisions</p>
+                                        <FilterSelectedItems
+                                            filteredList={filteredDemisions}
+                                            selectedItems={selectedDemision}
+                                        />
                                     </div>
                                     <div
                                         className={className('filter-container__dropdown-list-demisions', {

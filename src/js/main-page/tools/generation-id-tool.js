@@ -3,4 +3,4 @@ const s4 = () =>
         .toString(16)
         .substring(1);
 
-export default () => `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+export const idGenerator = () => `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;

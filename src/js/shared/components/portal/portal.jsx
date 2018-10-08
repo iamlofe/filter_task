@@ -26,7 +26,15 @@ class Portal extends React.Component {
     }
 
     updateWrapperPosition() {
-        const position = this.positionNode.getBoundingClientRect();
+        let position;
+        if (this.positionNode) {
+            position = this.positionNode.getBoundingClientRect();
+        }
+
+        if (!this.positionNode) {
+            position = document.createElement('div');
+        }
+
         const offsetTop = position.top + window.pageYOffset;
         const offsetLeft = position.left + window.pageXOffset;
 

@@ -3,8 +3,12 @@
     "extends": "airbnb",
     "globals": {
         "localStorage": true,
+        "it": true,
+        "expect": true,
         "document": true,
-        "window": true
+        "describe": true,
+        "window": true,
+        "jest": true
     },
     "rules": {
         "comma-dangle": 0,

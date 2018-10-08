@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'shared/components/button-filter/button-filter';
-import Filter from '../../containers/filter-container';
+import Filter from 'main-page/containers/filter-container';
 
 import './filter-list.scss';
 

@@ -1,21 +1,24 @@
 import { createAction } from 'redux-actions';
 
-import parseTool from '../tools/parse-local-storage-tool';
+import { parseTool } from '../tools/parse-local-storage-tool';
 
 import LocalStorage from '../tools/local-storage-tool';
 
 export const createDisplay = createAction('CREATE_FILTER');
+
 export const deleteFilter = createAction('DELETE_FILTER', filterId => ({ filterId }));
 
 export const changeStateContext = createAction('CHANGE_STATE_CONTEXT', (filterId, contextId) => ({
     filterId,
     contextId
 }));
+
 export const changeStateDemission = createAction('CHANGE_STATE_DEMISSION', (filterId, contextId, demisionId) => ({
     filterId,
     contextId,
     demisionId
 }));
+
 export const changeStateResult = createAction('CHANGE_STATE_RESULT', (filterId, contextId, demisionId, resultId) => ({
     filterId,
     contextId,
@@ -24,12 +27,14 @@ export const changeStateResult = createAction('CHANGE_STATE_RESULT', (filterId, 
 }));
 
 export const chooseTypeSearch = createAction('CHOOSE_TYPE_SEARCH', (filterId, type) => ({ filterId, type }));
-export const inputTitleSearch = createAction('INPUT_TITLE_SEARCH', (filterId, titleSearch) => ({
+
+export const inputTitleSearch = createAction('INPUT_TITLE_SEARCH', (filterId, searchTitle) => ({
     filterId,
-    titleSearch
+    searchTitle
 }));
 
 export const onSaveStateWidget = createAction('ON_SAVE_STATE_WIDGET', filterId => ({ filterId }));
+
 export const onRestoreSavingData = createAction('ON_RESTORE_SAVING_DATA', (filterId, data) => ({ filterId, data }));
 
 export const changeStateSavingData = createAction('CHANGE_STATE_SAVING_DATA', filterId => ({
@@ -40,7 +45,7 @@ export const changeStateRestoringData = createAction('CHANGE_STATE_RESTORING_DAT
     filterId
 }));
 
-const saveData = (getState, filterId) =>
+export const saveData = (getState, filterId) =>
     new Promise((res) => {
         setTimeout(() => {
             const savingData = {
@@ -57,7 +62,7 @@ const saveData = (getState, filterId) =>
         }, 1000);
     });
 
-const restoreData = filterId =>
+export const restoreData = filterId =>
     new Promise((res) => {
         setTimeout(() => {
             const restoringData = LocalStorage.get(filterId);

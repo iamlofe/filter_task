@@ -2,7 +2,7 @@ import { Record, List } from 'immutable';
 
 import RecordResults from './results-record';
 
-const Demisions = new Record({
+export const Demisions = new Record({
     id: null,
     title: null,
     contextId: null,

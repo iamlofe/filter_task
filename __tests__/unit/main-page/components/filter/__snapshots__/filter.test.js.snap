@@ -1,0 +1,368 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account component is shallow rendered with dataWidget.searchTitle  without  1`] = `
+<div
+  className="filter-container__state"
+>
+  <div
+    className="filter-container__state-content"
+  >
+    <div
+      className="filter-container__space-buttons"
+    >
+      <FilterButtonOpenWidget
+        className="filter-container__button_open-filter"
+        label="Open"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_delete-filter"
+        label="Delete"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_save-filter"
+        label="Save"
+        onClick={[MockFunction]}
+      />
+    </div>
+    <div
+      className="filter-container__display-state-container"
+    >
+      <div
+        className="filter-container__display-state"
+      >
+        <div
+          className="filter-container__parametrs-search"
+        >
+          <div
+            className="filter-container__type-search"
+          >
+            Type: 
+            <span />
+          </div>
+          <div
+            className="filter-container__string-search"
+          >
+            Search: 
+            <span>
+              test
+            </span>
+          </div>
+        </div>
+        <FilterState
+          label="Context"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Demisions"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Results"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`account component is shallow rendered with isRestoreAvailable true without crashing 1`] = `
+<div
+  className="filter-container__state"
+>
+  <div
+    className="filter-container__state-content"
+  >
+    <div
+      className="filter-container__space-buttons"
+    >
+      <FilterButtonOpenWidget
+        className="filter-container__button_open-filter"
+        label="Open"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_delete-filter"
+        label="Delete"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_save-filter"
+        label="Save"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_restore-filter"
+        label="Restore"
+        onClick={[MockFunction]}
+      />
+    </div>
+    <div
+      className="filter-container__display-state-container"
+    >
+      <div
+        className="filter-container__display-state"
+      >
+        <div
+          className="filter-container__parametrs-search"
+        />
+        <FilterState
+          label="Context"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Demisions"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Results"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`account component is shallow rendered with isRestoringData true without crashing 1`] = `
+<div
+  className="filter-container__state"
+>
+  <div
+    className="filter-container__state-content"
+  >
+    <div
+      className="filter-container__space-buttons"
+    >
+      <FilterButtonOpenWidget
+        className="filter-container__button_open-filter"
+        label="Open"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_delete-filter"
+        label="Delete"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_save-filter"
+        label="Save"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_restore-filter"
+        label="..."
+        onClick={[MockFunction]}
+      />
+    </div>
+    <div
+      className="filter-container__display-state-container"
+    >
+      <div
+        className="filter-container__display-state"
+      >
+        <div
+          className="filter-container__parametrs-search"
+        />
+        <FilterState
+          label="Context"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Demisions"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Results"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`account component is shallow rendered with isSavingData true without crashing 1`] = `
+<div
+  className="filter-container__state"
+>
+  <div
+    className="filter-container__state-content"
+  >
+    <div
+      className="filter-container__space-buttons"
+    >
+      <FilterButtonOpenWidget
+        className="filter-container__button_open-filter"
+        label="Open"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_delete-filter"
+        label="Delete"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_save-filter"
+        label="..."
+        onClick={[MockFunction]}
+      />
+    </div>
+    <div
+      className="filter-container__display-state-container"
+    >
+      <div
+        className="filter-container__display-state"
+      >
+        <div
+          className="filter-container__parametrs-search"
+        />
+        <FilterState
+          label="Context"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Demisions"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Results"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`account component is shallow rendered with isWidgetOpen true without crashing 1`] = `
+<div
+  className="filter-container__state"
+>
+  <div
+    className="filter-container__state-content"
+  >
+    <div
+      className="filter-container__space-buttons"
+    >
+      <FilterButtonOpenWidget
+        className="filter-container__button_open-filter"
+        label="Close"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_delete-filter"
+        label="Delete"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_save-filter"
+        label="Save"
+        onClick={[MockFunction]}
+      />
+    </div>
+    <div
+      className="filter-container__display-state-container"
+    >
+      <div
+        className="filter-container__display-state"
+      >
+        <div
+          className="filter-container__parametrs-search"
+        />
+        <FilterState
+          label="Context"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Demisions"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Results"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+      </div>
+      <Portal>
+        <Connect(FilterWidget)
+          filterId=""
+          onToggleWidget={[MockFunction]}
+        />
+      </Portal>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`account component is shallow rendered without crashing 1`] = `
+<div
+  className="filter-container__state"
+>
+  <div
+    className="filter-container__state-content"
+  >
+    <div
+      className="filter-container__space-buttons"
+    >
+      <FilterButtonOpenWidget
+        className="filter-container__button_open-filter"
+        label="Open"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_delete-filter"
+        label="Delete"
+        onClick={[MockFunction]}
+      />
+      <FilterButtonOpenWidget
+        className="filter-container__button_save-filter"
+        label="Save"
+        onClick={[MockFunction]}
+      />
+    </div>
+    <div
+      className="filter-container__display-state-container"
+    >
+      <div
+        className="filter-container__display-state"
+      >
+        <div
+          className="filter-container__parametrs-search"
+        />
+        <FilterState
+          label="Context"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Demisions"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+        <FilterState
+          label="Results"
+          listItems={Immutable.List []}
+          selectedItems={Immutable.List []}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

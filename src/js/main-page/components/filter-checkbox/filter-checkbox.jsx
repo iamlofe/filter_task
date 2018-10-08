@@ -30,20 +30,24 @@ class FilterCheckbox extends React.PureComponent {
         );
     };
 
-    inputCheck = React.createRef();
-
-    clickOnTitle = () => {
-        this.inputCheck.current.click();
-    };
-
     render() {
-        const { filteredItem, checked } = this.props;
+        const { filteredItem, checked, filterId } = this.props;
+
         return (
             <div className="filter-container__checkbox">
-                <input type="checkbox" checked={checked} onChange={this.onChangeState} ref={this.inputCheck} />
-                <p onClick={this.clickOnTitle}>{filteredItem.get('title')}</p>
+                <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={this.onChangeState}
+                    className="filter-container__input-checkbox"
+                    id={`${filterId}${filteredItem.get('id')}`}
+                />
+                <label htmlFor={`${filterId}${filteredItem.get('id')}`} className="filter-container__title-checkbox">
+                    {filteredItem.get('title')}
+                </label>
             </div>
         );
     }
 }
+
 export default FilterCheckbox;

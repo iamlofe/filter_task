@@ -1,6 +1,6 @@
 import { Record } from 'immutable';
 
-const Results = new Record({
+export const Results = new Record({
     id: null,
     title: null,
     contextId: null,

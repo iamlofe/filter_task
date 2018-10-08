@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`button-filter component should shalow rendered without crashing 1`] = `
+<div
+  className="filter-button testClass"
+>
+  <p
+    onClick={[MockFunction]}
+  >
+    test
+  </p>
+</div>
+`;

@@ -9,8 +9,8 @@ const initialData = new RecordInitialData();
 
 export const mainReducer = handleActions(
     {
-        [getDataFilter]: (state, action) =>
-            state.set('initialDataFilter', new List(action.payload)).set('isStatusLoadData', false)
+        [getDataFilter]: (state, { payload: { data } }) =>
+            state.set('initialDataFilter', new List(data)).set('isStatusLoadData', false)
     },
     initialData
 );

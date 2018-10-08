@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account component is shallow rendered with not empty filteredList without crashing 1`] = `
+<Fragment>
+  <FilterCheckbox
+    checked={false}
+    displayClass=""
+    filterId=""
+    filteredItem={
+      Immutable.Record {
+        "id": 3,
+        "title": "results",
+        "contextId": 1,
+        "demisionId": 2,
+        "resultId": 3,
+      }
+    }
+    key="3"
+    onChangeState={[MockFunction]}
+    selectedItems={Immutable.List []}
+  />
+  <FilterCheckbox
+    checked={false}
+    displayClass=""
+    filterId=""
+    filteredItem={
+      Immutable.Record {
+        "id": 4,
+        "title": "results2",
+        "contextId": 1,
+        "demisionId": 2,
+        "resultId": 4,
+      }
+    }
+    key="4"
+    onChangeState={[MockFunction]}
+    selectedItems={Immutable.List []}
+  />
+</Fragment>
+`;
+
+exports[`account component is shallow rendered without crashing 1`] = `<Fragment />`;

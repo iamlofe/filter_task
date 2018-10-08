@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account component is shallow rendered without crashing 1`] = `
+<div
+  className="filter-container__list-selected-items"
+>
+  <p
+    key="3"
+  >
+    results
+  </p>
+  <p
+    key="4"
+  >
+    results2
+  </p>
+</div>
+`;

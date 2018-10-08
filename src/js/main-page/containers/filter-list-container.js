@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import FilterList from '../components/filter-list/filter-list';
 
-import { createDisplay, deleteFilter as deleteFilterAction } from '../actions/filter-actions';
+import { createDisplay } from '../actions/filter-actions';
 
 import { filterIdsSelector } from '../selectors/filter-selector';
 

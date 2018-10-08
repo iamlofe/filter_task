@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component filter state should don't render element if selectedItems is empty 1`] = `<Fragment />`;
+
+exports[`component filter state should make snapshot without crashing 1`] = `
+<Fragment>
+  <div
+    className="filter-container__display-context"
+  >
+    <div
+      className="filter-container__display-context-title"
+    >
+      pow
+      :
+    </div>
+    <div
+      className="filter-container__display-context-list"
+    >
+      <div
+        key="3"
+      >
+        results
+      </div>
+      <div
+        key="4"
+      >
+        results2
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;

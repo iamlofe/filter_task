@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`button-filter component should shalow rendered without crashing 1`] = `
+<div>
+  <Portal
+    containerInfo={
+      <div
+        style="position: absolute;"
+      />
+    }
+  >
+    <div>
+       sss
+    </div>
+  </Portal>
+</div>
+`;

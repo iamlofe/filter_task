@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account component should shallow rendered without crashing 1`] = `
+<div
+  className="filter-container__checkbox"
+>
+  <input
+    checked={false}
+    className="filter-container__input-checkbox"
+    id="null"
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <label
+    className="filter-container__title-checkbox"
+    htmlFor="null"
+  />
+</div>
+`;

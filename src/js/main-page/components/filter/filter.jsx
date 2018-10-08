@@ -6,7 +6,7 @@ import Portal from 'shared/components/portal/portal';
 import Button from 'shared/components/button-filter/button-filter';
 import FilterState from 'main-page/components/filter-state/filter-state';
 import FilterWidget from 'main-page/containers/filter-widget-container';
-import { CurrentContext } from '../../records/filter-record';
+import { CurrentContext } from 'main-page/records/filter-record';
 
 import './filter.scss';
 

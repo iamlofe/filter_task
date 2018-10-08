@@ -4,7 +4,7 @@ import RecordContext from 'main/records/contexts-record';
 
 import dataFilter from '../../../../data.json';
 
-export const getDataFilter = createAction('LOAD_DATA', data => data);
+export const getDataFilter = createAction('LOAD_DATA', data => ({ data }));
 
 const getData = () =>
     new Promise((res) => {

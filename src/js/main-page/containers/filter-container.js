@@ -55,7 +55,6 @@ export default compose(
             contexts: contexts(state),
             demisions: demisions(state),
             results: results(state),
-
             filterIds: filterIdsSelector(state)
         }),
         dispatch => ({

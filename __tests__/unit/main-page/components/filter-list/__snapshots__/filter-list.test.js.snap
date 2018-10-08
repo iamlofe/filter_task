@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account component is shallow rendered with statusLoad true without crashing 1`] = `
+<div
+  className="filter-container__main-container"
+>
+  <span>
+    ...
+  </span>
+  <div
+    className="filter-container__state-container"
+  >
+    <withStateHandlers(Connect(withHandlers(pure(DisplayWidget))))
+      filterId=""
+      key=""
+    />
+  </div>
+</div>
+`;
+
+exports[`account component is shallow rendered without crashing 1`] = `
+<div
+  className="filter-container__main-container"
+>
+  <FilterButtonOpenWidget
+    className="filter__button-create"
+    label="Create"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="filter-container__state-container"
+  >
+    <withStateHandlers(Connect(withHandlers(pure(DisplayWidget))))
+      filterId=""
+      key=""
+    />
+  </div>
+</div>
+`;
