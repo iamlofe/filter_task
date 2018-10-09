@@ -48,29 +48,24 @@ export const results = createSelector(
     demision => new List(demision.reduce((acc, element) => acc.concat(...element.get('listsResults')), []))
 );
 
-export const filteredDemisions = createSelector(selectedContext, contexts, (contextIds, contextList) => {
-    let filteredDemisionsList = new List();
-
-    contextList.forEach((context) => {
-        if (contextIds.includes(context.get('contextId'))) {
-            context.get('listsDimensions').forEach((demision) => {
-                filteredDemisionsList = filteredDemisionsList.push(demision);
-            });
+export const filteredDemisions = createSelector(selectedContext, contexts, (contextIds, contextList) =>
+    contextList.reduce((acc, cur) => {
+        if (contextIds.includes(cur.get('contextId'))) {
+            return acc.concat(cur.get('listsDimensions'));
         }
-    });
 
-    return filteredDemisionsList;
-});
+        return acc;
+    }, new List()));
 
-export const filteredResults = createSelector(filteredDemisions, selectedDemision, (demisionIds, demisionList) => {
-    let filteredResultsList = new List();
-    demisionIds.forEach((demision) => {
-        if (demisionList.includes(demision.get('demisionId'))) {
-            demision.get('listsResults').forEach((result) => {
-                filteredResultsList = filteredResultsList.push(result);
-            });
+export const filteredResults = createSelector(selectedDemision, filteredDemisions, (demisionIds, demisionList) => {
+    const filteredResultsList = demisionList.reduce((acc, cur) => {
+        if (demisionIds.includes(cur.get('demisionId'))) {
+            return acc.concat(cur.get('listsResults'));
         }
-    });
+
+        return acc;
+    }, new List());
+
     return sortTools(filteredResultsList);
 });
 
